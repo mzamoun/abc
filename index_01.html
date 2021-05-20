@@ -14,7 +14,7 @@
         <!-- Nous allons afficher un retour en jQuery au visiteur -->
     </div>
          
-        <h1>Un formulaire de connexion en AJAX< ZZZZZZZZZZZZZZZ/h1>
+        <h1>Un formulaire de connexion en AJAX</h1>
  
     <form>
         <p>
@@ -30,32 +30,41 @@
 <script>
  
 $(document).ready(function(){
-
-    function callback(e) {
-        $("#resultat").html("<p>Res:</p><br>"  + e.result);
-    }
  
     $("#submit").click(function(e){
         e.preventDefault();
 
-        var url = 'https://script.google.com/macros/s/AKfycbyY5CI9sQd7gqE18-DeRQ8EHYracYwTnU_xnUhTvTpsE-95QYlsJe8QM5zkMDtNXrau/exec';
+        var url = 'https://script.google.com/macros/s/AKfycbxk98o9O9xHN8fjBpEo8Y14MvmUZ5Inhf1dytkrI2GbRMQVKc-Ql-QtejNVYHxGbOwF/exec';
         var myData = {
             cmd: 'login',
             username : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-            password : $("#password").val(),
-            callback : 'callback'
+            password : $("#password").val()
         };
+ 
+        $.ajax({
 
-        
-        var request = jQuery.ajax({
-            crossDomain: true,
-            url: url ,
-            data: myData,
-            method: "POST",
-            dataType: "jsonp"
-            });
-
-
+                url: url,
+                data: myData,
+                type: 'GET',
+                crossDomain: true,
+                dataType: 'html',
+                
+                xhrFields: {
+                    withCredentials: true,
+                    cors: true,
+                },
+                
+                success: function(res) { 
+                    console.log(res);
+                    res = JSON.stringify(res);
+                    $("#resultat").html("<p>Vous avez été connecté avec succès !</p><br>" + 'res=' + res);
+                 },
+                error: function(err) { 
+                    console.log(err);
+                    err = JSON.stringify(err);
+                    $("#resultat").html("<p>Erreur ! </p><br>" + 'err=' + err);
+                 },
+                });
     });
 });
  
