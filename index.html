@@ -7,6 +7,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
 
+    <script src="gen.js" > </script>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="msg.css">
 
@@ -17,13 +19,13 @@
     <div id="success" class="success box"  >  </div>
     <div id="error" class="error box"  >  </div>
          
-    <h1>Connexion: </h1>
- 
+    
     <form>
-
+        
         <div class="login">
-            <input type="text" placeholder="Username" id="username">  
-            <input type="password" placeholder="password" id="password">  
+            <h3 class="center"> Connexion: </h3>
+            <input type="text" placeholder="Email" id="username">  
+            <input type="password" placeholder="Password" id="password">  
 
                 <a href="#" class="forgot">forgot password?</a>
 
@@ -38,11 +40,38 @@
 </html>
  
 <script>
-    var url = 'https://script.google.com/macros/s/AKfycbxOnxHcI_tfYCmo0jAD0rFsxYIXzKPN1QwW8Zvgz6ax1hg9su8E9j_VoWLrgEW9qDQf/exec';
+    var url = 'https://script.google.com/macros/s/AKfycbx4xHoWuM9R5ogwWOvM2Vej2Z8L8Ox1_-4zA6esI6T5chONcsWbtDiUqxJJtqUeuNSq/exec';
+
+    function hideInfos() {
+        showDiv('success', false);
+        showDiv('error', false);
+    }
+
+    function showSuccess() {
+        showDiv('success', true);
+    }
+    function showError() {
+        showDiv('error', true);
+    }
+    function setSuccess(msg) {
+        loadDiv('success', msg);
+    }
+    function setError(msg) {
+        loadDiv('error', msg);
+    }
 
     function onLogin  (e) {
         console.log(e);
-        $("#resultat").html("<p>Info Login:</p>"  + JSON.stringify(e.data) );
+        var msg = JSON.stringify(e.data);
+        msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
+        if(msg.startsWith('ERROR')) {
+            setError("<p>Info Login:</p>"  + msg );
+            showError();
+        }else {
+            setSuccess("<p>Info Login:</p>"  + msg );
+            showSuccess();
+        }
+
     }     
 
     function callMeGet  (e) {
@@ -53,12 +82,16 @@
     function callMePost  (e) {
         console.log(e);
         $("#resultat").html("<p>Post:</p>"  + JSON.stringify(e.data) );
-    }      
+    }    
+    
  
 $(document).ready(function(){
 
+    hideInfos();
+
     $("#submit").click(function(e){
         e.preventDefault();
+        hideInfos();
 
         var myData = {
             cmd: 'login',
