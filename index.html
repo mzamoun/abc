@@ -7,7 +7,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
 
+    <script src="vars.js" > </script>
     <script src="gen.js" > </script>
+    <script src="profil.js" > </script>
+    <script src="login.js" > </script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="msg.css">
@@ -27,7 +30,7 @@
             <input type="text" placeholder="Email" id="username">  
             <input type="password" placeholder="Password" id="password">  
 
-                <a href="#" class="forgot">forgot password?</a>
+                <a href="#" class="forgot" onclick="return onForgotPassword();">forgot password?</a>
 
           <input type="submit" id="submit" value="Sign In">
 
@@ -40,51 +43,7 @@
 </html>
  
 <script>
-    var url = 'https://script.google.com/macros/s/AKfycbx4xHoWuM9R5ogwWOvM2Vej2Z8L8Ox1_-4zA6esI6T5chONcsWbtDiUqxJJtqUeuNSq/exec';
-
-    function hideInfos() {
-        showDiv('success', false);
-        showDiv('error', false);
-    }
-
-    function showSuccess() {
-        showDiv('success', true);
-    }
-    function showError() {
-        showDiv('error', true);
-    }
-    function setSuccess(msg) {
-        loadDiv('success', msg);
-    }
-    function setError(msg) {
-        loadDiv('error', msg);
-    }
-
-    function onLogin  (e) {
-        console.log(e);
-        var msg = JSON.stringify(e.data);
-        msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
-        if(msg.startsWith('ERROR')) {
-            setError("<p>Info Login:</p>"  + msg );
-            showError();
-        }else {
-            setSuccess("<p>Info Login:</p>"  + msg );
-            showSuccess();
-        }
-
-    }     
-
-    function callMeGet  (e) {
-        console.log(e);
-        $("#resultat").html("<p>Get:</p>"  + JSON.stringify(e.data) );
-    }  
-
-    function callMePost  (e) {
-        console.log(e);
-        $("#resultat").html("<p>Post:</p>"  + JSON.stringify(e.data) );
-    }    
     
- 
 $(document).ready(function(){
 
     hideInfos();
