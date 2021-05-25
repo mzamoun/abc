@@ -30,7 +30,7 @@
             <input type="text" placeholder="Email" id="username">  
             <input type="password" placeholder="Password" id="password">  
 
-                <a href="#" class="forgot" onclick="return onForgotPassword();">forgot password?</a>
+                <a id='forgotPassword' href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>
 
           <input type="submit" id="submit" value="Sign In">
 
@@ -49,31 +49,9 @@ $(document).ready(function(){
     hideInfos();
 
     $("#submit").click(function(e){
-        e.preventDefault();
-        hideInfos();
-
-        var myData = {
-            cmd: 'login',
-            email : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
-            password : $("#password").val(),
-            callbackFun : 'onLogin'
-        };
-
-        $.ajax({
-            type: 'POST',
-            crossDomain: true,
-            url: url ,
-            data: myData,
-            dataType: "jsonp",
-            success: function(e) {
-                console.log('success', e);
-            },
-            error: function(e) {
-                console.log('error', e);
-            },
-        });
-
+        onLoginClick(e);
    });
+   addEventValidUsername(['submit', 'forgotPassword']);
 
 });
  

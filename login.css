@@ -68,7 +68,7 @@ input[type="checkbox"]:checked {
 }
 input[type="checkbox"]:checked + .toggle { background-position: 0 -16px }
 .forgot {
-  color: #7f7f7f;
+  color: white;
   display: inline-block;
   float: right;
   font: 12px/1 sans-serif;
