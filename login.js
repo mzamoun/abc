@@ -33,7 +33,6 @@ function onLogin(e) {
         showError("<p>Info Login:</p>"  + msg );
     }else {
         editProfilUser();
-        showProfils();
     }
 
 } 

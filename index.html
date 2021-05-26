@@ -21,7 +21,6 @@
 <body>
     <div id="success" class="success box"  >  </div>
     <div id="error" class="error box"  >  </div>
-         
     
     <form>
         
@@ -32,10 +31,10 @@
 
                 <a id='forgotPassword' href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>
 
-          <input type="submit" id="submit" value="Sign In">
+          <input type="submit" id="btnLogin" value="Sign In">
 
+          <!-- <div class="shadow"></div> -->
         </div>
-        <div class="shadow"></div>
 
     </form>
  
@@ -48,10 +47,10 @@ $(document).ready(function(){
 
     hideInfos();
 
-    $("#submit").click(function(e){
+    $("#btnLogin").click(function(e){
         onLoginClick(e);
    });
-   addEventValidUsername(['submit', 'forgotPassword']);
+   addEventValidUsername(['btnLogin', 'forgotPassword']);
 
 });
  
