@@ -10,6 +10,42 @@ function enableElement(id, ok) {
     $('#' + id).css('background-color', ok? bgColorOk:bgColorKo);
 }
 
+function isConnected() {
+    return $.cookie("isConnected") != null;
+}
+function onConnected() {
+    $.cookie("isConnected", "true", { expires: 7 });
+}
+function onDisConnected() {
+    $.cookie("isConnected", null);
+}
+
+function getCompoFormLogin() {
+    var s = '<form id="formLogin">';
+        
+    s = s+' <div class="login">'
+    s = s + '  <h3 class="center"> Connexion: </h3>'
+    s = s + '    <input type="text" placeholder="Email" id="username">  '
+    s = s + '    <input type="password" placeholder="Password" id="password">  '
+
+    s = s + '        <a id="forgotPassword" href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>'
+
+    s = s + '  <input type="submit" id="btnLogin" value="Sign In">'
+
+    s = s +  ' <!-- <div class="shadow"></div> -->'
+    s = s + ' </div>'
+
+    s = s + '</form>'
+
+    s = s + '$(document).ready(function(){'
+    s = s + '   hideInfos();'
+    s = s + '   $("#btnLogin").click(function(e){ onLoginClick(e); });'
+    s = s + '   addEventValidUsername(["btnLogin", "forgotPassword"]);'
+    s = s + ' }); '
+
+    return s;
+}
+
 function addEventValidUsername(listBtns) {
 
     for(var i=0; i<listBtns.length; i++) {
@@ -32,7 +68,7 @@ function onLogin(e) {
     if(msg.startsWith('ERROR')) {
         showError("<p>Info Login:</p>"  + msg );
     }else {
-        editProfilUser();
+        onConnected();
     }
 
 } 

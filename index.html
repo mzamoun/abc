@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
     <script src="vars.js" > </script>
     <script src="gen.js" > </script>
@@ -22,21 +23,7 @@
     <div id="success" class="success box"  >  </div>
     <div id="error" class="error box"  >  </div>
     
-    <form>
-        
-        <div class="login">
-            <h3 class="center"> Connexion: </h3>
-            <input type="text" placeholder="Email" id="username">  
-            <input type="password" placeholder="Password" id="password">  
-
-                <a id='forgotPassword' href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>
-
-          <input type="submit" id="btnLogin" value="Sign In">
-
-          <!-- <div class="shadow"></div> -->
-        </div>
-
-    </form>
+    <div id="compo"></div>
  
 </body>
 </html>
@@ -46,11 +33,9 @@
 $(document).ready(function(){
 
     hideInfos();
-
-    $("#btnLogin").click(function(e){
-        onLoginClick(e);
-   });
-   addEventValidUsername(['btnLogin', 'forgotPassword']);
+    if(!isConnected()) {
+        loadDiv( getCompoFormLogin() );
+    }
 
 });
  
