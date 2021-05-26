@@ -34,8 +34,10 @@ $(document).ready(function(){
 
     hideInfos();
     if(!isConnected()) {
-        loadDiv( getCompoFormLogin() );
+        loadDiv("compo",  getCompoFormLogin() );
     }
+
+    //showSuccess('isConnected=/'+getCookie("isConnected")+'/');
 
 });
  

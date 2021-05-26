@@ -10,16 +10,6 @@ function enableElement(id, ok) {
     $('#' + id).css('background-color', ok? bgColorOk:bgColorKo);
 }
 
-function isConnected() {
-    return $.cookie("isConnected") != null;
-}
-function onConnected() {
-    $.cookie("isConnected", "true", { expires: 7 });
-}
-function onDisConnected() {
-    $.cookie("isConnected", null);
-}
-
 function getCompoFormLogin() {
     var s = '<form id="formLogin">';
         
@@ -37,11 +27,13 @@ function getCompoFormLogin() {
 
     s = s + '</form>'
 
+    s = s + '<script>'
     s = s + '$(document).ready(function(){'
     s = s + '   hideInfos();'
     s = s + '   $("#btnLogin").click(function(e){ onLoginClick(e); });'
     s = s + '   addEventValidUsername(["btnLogin", "forgotPassword"]);'
     s = s + ' }); '
+    s = s + '</script>'
 
     return s;
 }
