@@ -1,3 +1,110 @@
 .center {
     text-align: center;
 }
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Arial;
+    font-size: 17px;
+  }
+  
+  #myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+  }
+  
+  .content {
+    position: fixed;
+    bottom: 40%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .contentPage {
+    position: fixed;
+    top: 20%;
+    bottom: 0%;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #title {
+    font-weight: bold;
+  }
+  
+  #btnPause {
+    width: 200px;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #btnPause:hover {
+    background: #ddd;
+    color: black;
+  }
+  
+  .btnMenu {
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+    .btnAcceuil {
+      font-size: 30px;
+      padding: 10px;
+      border: none;
+      background: #000;
+      color: #fff;
+      cursor: pointer;
+    }
+  
+  .info {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px;
+    background: #000;
+    color: blue;
+  }
+  
+  .err {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px;
+    background: #000;
+    color: red;
+  }
+  
+  .prec, .next {
+    position: absolute; top:50%; font-size: 40px; background-color: White;
+  }
+  
+  .prev:hover,
+  .next:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  body {
+    background-color: lightblue;
+    background-image: url(https://cdn.umso.co/87zmvc5pwl6o/assets/y4gmlfm6.svg);
+    background-repeat:no-repeat;
+  }

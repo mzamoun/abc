@@ -37,43 +37,17 @@ function showError(msg) {
     showDiv(id, true);
 }
 ///////////////////////////
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+
+function isEmail(email) {
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return regex.test(email);
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
+function enableElement(id, ok) {
+    $('#' + id).attr('disabled', !ok);
+    var bgColorOk = '#37a69b';
+    var bgColorKo = 'gray';
+    $('#' + id).css('background-color', ok? bgColorOk:bgColorKo);
+}
+///////////////////
 
-////
-function isConnected() {
-    var x = getCookie("isConnected");
-    ok = false;
-    if (x != null && x != '') {
-        ok = true;
-    }
-    return ok;
-}
-function onConnected() {
-    setCookie("isConnected", true, 7);
-}
-function onDisConnected() {
-    setCookie("isConnected", null, 0);
-}
-
-  //////////////////

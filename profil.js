@@ -2,6 +2,6 @@ function editProfilUser() {
 
 }
 
-function showProfils() {
+function showProfilAll() {
     
 }

@@ -1,17 +1,8 @@
-function isEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return regex.test(email);
-}
-
-function enableElement(id, ok) {
-    $('#' + id).attr('disabled', !ok);
-    var bgColorOk = '#37a69b';
-    var bgColorKo = 'gray';
-    $('#' + id).css('background-color', ok? bgColorOk:bgColorKo);
-}
 
 function getCompoFormLogin() {
-    var s = '<form id="formLogin">';
+    var s = '';
+    s = s + '<link rel="stylesheet" href="login.css">\n'
+    s = s + '<form id="formLogin">';
         
     s = s+' <div class="login">'
     s = s + '  <h3 class="center"> Connexion: </h3>'
@@ -29,7 +20,7 @@ function getCompoFormLogin() {
 
     s = s + '<script>'
     s = s + '$(document).ready(function(){'
-    s = s + '   hideInfos();'
+    s = s + '   //hideInfos();\n'
     s = s + '   $("#btnLogin").click(function(e){ onLoginClick(e); });'
     s = s + '   addEventValidUsername(["btnLogin", "forgotPassword"]);'
     s = s + ' }); '
@@ -37,6 +28,28 @@ function getCompoFormLogin() {
 
     return s;
 }
+
+///////////////
+
+function isConnected() {
+    var x = getCookie("isConnected");
+    ok = false;
+    if (x != null && x != '') {
+        ok = true;
+    }
+    return ok;
+}
+function onConnected() {
+    setCookie("isConnected", "true", 7);
+    console.log(document.cookie);
+    showSuccess(JSON.stringify(document.cookie))
+}
+function onDisConnected() {
+    setCookie("isConnected", null, 0);
+    username = '';
+}
+
+  //////////////////
 
 function addEventValidUsername(listBtns) {
 
@@ -60,6 +73,7 @@ function onLogin(e) {
     if(msg.startsWith('ERROR')) {
         showError("<p>Info Login:</p>"  + msg );
     }else {
+        username = $("#username").val();
         onConnected();
     }
 

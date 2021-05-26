@@ -6,26 +6,28 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
     <script src="vars.js" > </script>
     <script src="gen.js" > </script>
+    <script src="navigator.js" > </script>
+    <script src="menu.js" > </script>
     <script src="profil.js" > </script>
     <script src="login.js" > </script>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="msg.css">
 
 
 </head>
  
 <body>
-    <div id="success" class="success box"  >  </div>
+    <div id="menu" style="width: 100%; "></div>
+
+    <div id="success" class="success box" onclick="setCookie('hi', 'ho', 7); console.log(document.cookie)"  >  </div>
     <div id="error" class="error box"  >  </div>
     
     <div id="compo"></div>
  
-</body>
+</body style="background-color: lightblue;" >
 </html>
  
 <script>
@@ -35,9 +37,9 @@ $(document).ready(function(){
     hideInfos();
     if(!isConnected()) {
         loadDiv("compo",  getCompoFormLogin() );
+    }else {
+        showMenu();
     }
-
-    //showSuccess('isConnected=/'+getCookie("isConnected")+'/');
 
 });
  
