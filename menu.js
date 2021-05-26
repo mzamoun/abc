@@ -17,7 +17,11 @@ function getCompoMenu() {
     s = s +  '  <div id="btnUserIcon" class="navbar" style="float:right; color: white;" onclick="editProfilUser();" > </div>'
 
     s = s +  '  <div class="collapse navbar-collapse navbar-right" id="myNavbar">'
-    s = s +  '   <ul class="nav navbar-nav" id="menuProfilAll" onclick="showProfilAll()">  </ul>'
+    s = s +  '   <ul class="nav navbar-nav" id="menusPage" > '
+    s = s +  '       <li> <button id="menuDisconnect" class="btnMenu" onclick="onDisConnected()" >Disconnect</button> </li> '
+    s = s +  '       <li> <button id="menuProfilUser" class="btnMenu" onclick="editProfilUser()" >Profil User</button> </li> '
+    s = s +  '       <li> <button id="menuProfilAll" class="btnMenu" onclick="showProfilAll()" >Profil All</button> </li> '
+    s = s +      '</ul>'
     s = s +  '  </div>'
     s = s +  ' </div>'
     s = s +  '</nav>'
@@ -30,5 +34,6 @@ function showMenu() {
     loadDiv("menu",  getCompoMenu() );
 
     loadDiv("btnUserIcon",  username );
+
 
 }

@@ -29,6 +29,13 @@ function getCompoFormLogin() {
     return s;
 }
 
+////////////
+
+function showLogin() {
+    loadDiv("menu",  '' );
+    loadDiv("compo",  getCompoFormLogin() );
+}
+
 ///////////////
 
 function isConnected() {
@@ -40,13 +47,15 @@ function isConnected() {
     return ok;
 }
 function onConnected() {
-    setCookie("isConnected", "true", 7);
-    console.log(document.cookie);
-    showSuccess(JSON.stringify(document.cookie))
+    username = $("#username").val();
+    setCookie("isConnected", username);
+    loadDiv("compo",  '' );
+    showMenu();
 }
 function onDisConnected() {
-    setCookie("isConnected", null, 0);
     username = '';
+    setCookie("isConnected", '', 0);
+    showLogin();
 }
 
   //////////////////
@@ -73,7 +82,6 @@ function onLogin(e) {
     if(msg.startsWith('ERROR')) {
         showError("<p>Info Login:</p>"  + msg );
     }else {
-        username = $("#username").val();
         onConnected();
     }
 
