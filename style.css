@@ -78,6 +78,16 @@
       color: #fff;
       cursor: pointer;
     }
+
+    .btnUserIcon {
+        font-size: 10px;
+        padding: 10px;
+        border: none;
+        background: #000;
+        color: #fff;
+        cursor: pointer;
+        float: right;
+      }    
   
   .info {
     font-size: 18px;

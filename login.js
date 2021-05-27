@@ -39,22 +39,22 @@ function showLogin() {
 ///////////////
 
 function isConnected() {
-    var x = getCookie("isConnected");
+    username = getCookie("username");
     ok = false;
-    if (x != null && x != '') {
+    if (username != null && username != '') {
         ok = true;
     }
     return ok;
 }
 function onConnected() {
     username = $("#username").val();
-    setCookie("isConnected", username);
-    loadDiv("compo",  '' );
+    setCookie("username", username);
     showMenu();
+    loadDiv("compo",  '' );
 }
 function onDisConnected() {
     username = '';
-    setCookie("isConnected", '', 0);
+    setCookie("username", username);
     showLogin();
 }
 
