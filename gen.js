@@ -1,8 +1,37 @@
 //////////////////
+function getElement(tagName, attrs, content) {
+    var s = '<' + tagName;
+    var v = '';
+    if(attrs != null ){
+        for (const p in attrs) {
+            v = attrs[p];
+            s = s + ' ' + p + '="' + v + '"';
+        }
+    }
+
+    s = s + '>';
+    if(content != null){
+        s = s + content;
+    }   
+    s = s + '</' + tagName + '>';
+
+    return s;
+}
+
+///////////////////////
 function loadDiv(idDiv, html) {
     var el = $('#'+idDiv);
     if(el) {
         el.html(html);
+    }
+}
+
+///////////////////////
+
+function loadButton(id, html) {
+    var el = $('#'+id);
+    if(el) {
+        el.val(html);
     }
 }
 
