@@ -28,7 +28,7 @@ function loadDiv(idDiv, html) {
 
 ///////////////////////
 function notImplemented() {
-    loadDiv('compo', getElement('h1', null, 'Not implemented for now !'));
+    loadDiv('compo', getElement('h1', null, 'Not implemented yet !'));
 }
 
 ///////////////////////

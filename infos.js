@@ -3,5 +3,5 @@ function showAcceuil() {
 }
 
 function showInfos() {
-    notImplemented();
+    loadDiv('compo', getElement('h1', null, 'No Infos for now !'));
 }
