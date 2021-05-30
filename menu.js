@@ -1,8 +1,25 @@
-function showAcceuil() {
-    alert('Accnot implemented');
+
+function showMenu() {
+
+    username = getCookie("username");
+    loadDiv("menu",  getCompoMenu() );
+    if(isConnected()) {
+        loadDiv("btnUserIcon",  username );
+    }else {
+        loadDiv("btnUserIcon",  'Login' );
+    }
+
 }
 
-function getCompoMenuUser() {
+function getCompoMenuLogin() {
+    var s = '';
+
+    s = s +  '                <button id="menuLogin" class="btnMenu btnUserIcon" onclick="showLogin()" >Login</button> '
+
+    return s;
+}
+
+function getCompoMenuLoged() {
     var s = '';
 
     s = s +  '                <div class="nav-item dropdown btnUserIcon">'
@@ -19,6 +36,18 @@ function getCompoMenuUser() {
     return s;
 }
 
+function getCompoMenuUser() {
+    var s = '';
+
+    if(isConnected()) {
+        s = getCompoMenuLoged();
+    }else {
+        s = getCompoMenuLogin();
+    }
+
+    return s;
+}
+
 function getCompoMenuAll() {
     var s = '';
 
@@ -30,7 +59,7 @@ function getCompoMenuAll() {
     
     s = s +  '  <div class="collapse navbar-collapse navbar-right" style="float:right;" id="myNavbarAll">'
     s = s +  '   <ul class="nav navbar-nav" id="menusAll" > '
-    s = s +  '       <li> <button id="menuInfos" class="btnMenu" onclick="showProfilAll()" >Infos</button> </li> '
+    s = s +  '       <li> <button id="menuInfos" class="btnMenu" onclick="showInfos()" >Infos</button> </li> '
     s = s +      '</ul>'
     s = s +  '  </div>'
 
@@ -58,13 +87,4 @@ function getCompoMenu() {
     s = s +  '</nav>'
 
     return s;
-}
-
-function showMenu() {
-
-    loadDiv("menu",  getCompoMenu() );
-    username = getCookie("username");
-    loadDiv("btnUserIcon",  username );
-
-
 }

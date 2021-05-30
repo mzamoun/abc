@@ -32,7 +32,7 @@ function getCompoFormLogin() {
 ////////////
 
 function showLogin() {
-    loadDiv("menu",  '' );
+    //loadDiv("menu",  '' );
     loadDiv("compo",  getCompoFormLogin() );
 }
 
@@ -50,12 +50,16 @@ function onConnected() {
     username = $("#username").val();
     setCookie("username", username);
     showMenu();
-    loadDiv("compo",  '' );
+    loadDiv("btnUserIcon",  username );
+    showAcceuil();
+
 }
 function onDisConnected() {
     username = '';
     setCookie("username", username);
+    loadDiv("btnUserIcon",  username );
     showLogin();
+
 }
 
   //////////////////

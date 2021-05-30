@@ -27,6 +27,11 @@ function loadDiv(idDiv, html) {
 }
 
 ///////////////////////
+function notImplemented() {
+    loadDiv('compo', getElement('h1', null, 'Not implemented for now !'));
+}
+
+///////////////////////
 
 function loadButton(id, html) {
     var el = $('#'+id);

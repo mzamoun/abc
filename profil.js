@@ -1,7 +1,7 @@
 function editProfilUser() {
-    alert('editProfilUser not implemented yet !');
+    notImplemented();
 }
 
 function showProfilAll() {
-    
+    notImplemented();
 }
