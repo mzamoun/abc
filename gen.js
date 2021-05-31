@@ -95,11 +95,11 @@ function callAjaxPost(e, myData) {
         url: url ,
         data: myData,
         dataType: "jsonp",
-        success: function(e) {
-            console.log('success', e);
+        success: function(ev) {
+            console.log('success', ev);
         },
-        error: function(e) {
-            console.log('error', e);
+        error: function(ev) {
+            console.log('error', ev);
         },
     });    
 }
@@ -135,3 +135,36 @@ function ConfirmDialog(question, fctYes, fctNo) {
         }
       });
   };
+  /////////////////////////
+  function getCompoFormEdit(line, cols, colsType, fctSaveName){
+    var s = '';
+    s = s + '<link rel="stylesheet" href="login.css">\n'
+    s = s + '<form id="formUser">';
+        
+    s = s+' <div class="login">'
+    s = s + '  <h3 class="center"> User Profil: </h3>'
+    for(var i=0; i<cols.length; i++) {
+        var key = cols[i];
+        var type = colsType[i];
+        var val = line[key];
+        if(type == 'textArea') {
+            s = s + '    <label for="'+key+'">'+key+'</label>';
+            s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50"> '+val+' </textarea> <br>\n';
+        }else {
+            s = s + '    <label for="'+key+'">'+key+'</label>';
+            s = s + '    <input type="text" name="'+key+'" id="'+key+'" value="'+val+'" >  <br>\n';            
+        }
+    }
+
+    s = s + '  <input type="submit" id="btnSave" value="Save">'
+
+    s = s + ' </div>'
+
+    s = s + '</form>'
+
+    s = s + '<script>'
+    s = s + '$(document).ready(function(){'
+    s = s + '   $("#btnSave").click(function(e){ '+fctSaveName+'(e); });'
+    s = s + ' }); '
+    s = s + '</script>'
+  }

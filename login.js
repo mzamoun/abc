@@ -57,6 +57,7 @@ function onConnected() {
 function onDisConnected() {
     ConfirmDialog('Do you want to disconnect ?', 
         function() {
+            userObj=null;
             username = '';
             setCookie("username", username);
             showMenu();
@@ -72,18 +73,23 @@ function onDisConnected() {
 
   //////////////////
 
-function addEventValidUsername(listBtns) {
+  function addEventValidElement(el, listBtns) {
 
     for(var i=0; i<listBtns.length; i++) {
         enableElement(listBtns[i] , false);
     }
 
-    var el = $("#username");
     el.on('keyup', function () {
         for(var i=0; i<listBtns.length; i++) {
             enableElement(listBtns[i] , isEmail(el.val()));
         }
     });
+}  
+
+function addEventValidUsername(listBtns) {
+
+    var el = $("#username");
+    addEventValidElement(el, listBtns);
 }
 
 function onLogin(e) {

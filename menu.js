@@ -28,8 +28,8 @@ function getCompoMenuLoged() {
     s = s +  '                    </div>'
     s = s +  '                    <div class="dropdown-menu btnMenu" > '
     s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu" onclick="onDisConnected()" >Disconnect</button> </a> '
-    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu" onclick="onProfilUserClick(e)" >Profil User</button> </a> '
-    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu" onclick="onProfilAllClick(e)" >Profil All</button> </a> '
+    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu" onclick="onProfilUserClick(event)" >Profil User</button> </a> '
+    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu" onclick="onProfilAllClick(event)" >Profil All</button> </a> '
     s = s +  '                    </div>'
     s = s +  '                </div>'
 
