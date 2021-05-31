@@ -1,3 +1,3 @@
-var url = 'https://script.google.com/macros/s/AKfycbz3W6R6JUnvVSVOJ-bdmFVvfSNpuM6TkZLVNlPXsgyvFz6NxboWuSxawc7YyFUETFeu/exec';
+var url = 'https://script.google.com/macros/s/AKfycbz3lrJ1dknMzWMld3hrJZCejapJXKfjrFyfhgTaXMYEgA6bVvRDvETiBzkUoKuOUlPB/exec';
 var username='----';
-var userObj = {};
+var userObj = '';

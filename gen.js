@@ -28,7 +28,7 @@ function loadDiv(idDiv, html) {
 
 ///////////////////////
 function notImplemented() {
-    loadDiv('compo', getElement('h1', null, 'Not implemented yet !'));
+    showCompo( getElement('h1', null, 'Not implemented yet !'));
 }
 
 ///////////////////////
@@ -38,6 +38,19 @@ function loadButton(id, html) {
     if(el) {
         el.val(html);
     }
+}
+
+///////////////////////
+
+function getValElement(id) {
+    var s ='';
+
+    var el = $('#'+id);
+    if(el) {
+        s = el.val();
+    }
+
+    return s;
 }
 
 ///////////////////////
@@ -136,35 +149,61 @@ function ConfirmDialog(question, fctYes, fctNo) {
       });
   };
   /////////////////////////
-  function getCompoFormEdit(line, cols, colsType, fctSaveName){
+  function getCompoFormEdit(line, cols, colsType, idForm, fctSaveName, fctRefreshName){
     var s = '';
-    s = s + '<link rel="stylesheet" href="login.css">\n'
-    s = s + '<form id="formUser">';
+    s = s + '<link rel="stylesheet" href="table.css">\n'
+    s = s + '<form id="'+idForm+'">';
         
-    s = s+' <div class="login">'
-    s = s + '  <h3 class="center"> User Profil: </h3>'
+    s = s + '<h3 class="center"> User Profil: </h3>'
+    s = s+' <table class="form">'
     for(var i=0; i<cols.length; i++) {
         var key = cols[i];
         var type = colsType[i];
         var val = line[key];
+
+        s = s + '<tr>\n';
+        s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
+        s = s + '  <td>';
         if(type == 'textArea') {
-            s = s + '    <label for="'+key+'">'+key+'</label>';
             s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50"> '+val+' </textarea> <br>\n';
         }else {
-            s = s + '    <label for="'+key+'">'+key+'</label>';
-            s = s + '    <input type="text" name="'+key+'" id="'+key+'" value="'+val+'" >  <br>\n';            
+            s = s + '    <input type="text" size="50" name="'+key+'" id="'+key+'" value="'+val+'" >  <br>\n';            
         }
+        s = s + '  </td>\n';
+        s = s + '</tr>\n';
     }
 
+    s = s + '<tr>\n';
+    s = s + '  <td colspan="2">';
+    s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
     s = s + '  <input type="submit" id="btnSave" value="Save">'
+    s = s + '  </td>\n';
 
-    s = s + ' </div>'
+    s = s + '</tr>\n';
+
+    s = s + ' </table>'
 
     s = s + '</form>'
 
     s = s + '<script>'
     s = s + '$(document).ready(function(){'
+    s = s + '   $("#btnRefresh").click(function(e){ '+fctRefreshName+'(e); });'
     s = s + '   $("#btnSave").click(function(e){ '+fctSaveName+'(e); });'
     s = s + ' }); '
     s = s + '</script>'
+    return s;
   }
+
+  /////////////////////
+
+  function userFormToObj(obj, cols) {
+    
+    for(var i=0; i<cols.length; i++) {
+        var key = cols[i];
+        var val = getValElement(key);
+        obj[key] = val;
+    }   
+    
+}
+
+///////////////////////////////////////

@@ -29,51 +29,8 @@ function getCompoFormLogin() {
     return s;
 }
 
-////////////
-
-function showLogin() {
-    //loadDiv("menu",  '' );
-    loadDiv("compo",  getCompoFormLogin() );
-}
-
-///////////////
-
-function isConnected() {
-    username = getCookie("username");
-    ok = false;
-    if (username != null && username != '') {
-        ok = true;
-    }
-    return ok;
-}
-function onConnected() {
-    username = $("#username").val();
-    setCookie("username", username);
-    showMenu();
-    //loadDiv("btnUserIcon",  username );
-    showAcceuil();
-
-}
-function onDisConnected() {
-    ConfirmDialog('Do you want to disconnect ?', 
-        function() {
-            userObj=null;
-            username = '';
-            setCookie("username", username);
-            showMenu();
-            showLogin();
-        },
-        function() {
-            ;
-        }
-    );
-
-
-}
-
-  //////////////////
-
-  function addEventValidElement(el, listBtns) {
+///////////////////////////
+function addEventValidElement(el, listBtns) {
 
     for(var i=0; i<listBtns.length; i++) {
         enableElement(listBtns[i] , false);
@@ -92,21 +49,72 @@ function addEventValidUsername(listBtns) {
     addEventValidElement(el, listBtns);
 }
 
+////////////
+
+function showLogin() {
+    //loadDiv("menu",  '' );
+    loadDiv("compo",  getCompoFormLogin() );
+}
+
+///////////////
+
+function isConnected() {
+    username = getCookie("username");
+    ok = false;
+    if (username != null && username != '') {
+        ok = true;
+    }
+    return ok;
+}
+function onConnected(e) {
+    console.log('onConnected: ', e);
+    userObj = e.data;
+    username = userObj.Email;
+
+    setCookie("username", username);
+    setCookie('userObj', JSON.stringify(userObj));
+
+    showMenu();
+    showAcceuil();
+
+}
+function onDisConnected() {
+    ConfirmDialog('Do you want to disconnect ?', 
+        function() {
+            userObj='';
+            username = '';
+            setCookie("username", username);
+            setCookie("userObj", userObj);
+            showMenu();
+            showLogin();
+        },
+        function() {
+            ;
+        }
+    );
+
+
+}
+
+  //////////////////
+
 function onLogin(e) {
-    console.log(e);
-    var msg = JSON.stringify(e.data);
+    console.log('onLogin: ', e);
+    var msg = JSON.stringify(e.msg);
     msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
     console.log('msg:' + msg+'.');
     if(msg.startsWith('ERROR')) {
         showError("<p>Info Login:</p>"  + msg );
     }else {
-        onConnected();
+        onConnected(e);
     }
 
 } 
 
 //////////////
 function onLoginClick(e) {
+
+    console.log('onLoginClick: ', e);
     
     var myData = {
         cmd: 'login',
@@ -122,12 +130,12 @@ function onLoginClick(e) {
 
 function onForgotPassword(e) {
     console.log(e);
-    var msg = JSON.stringify(e.data);
+    var msg = JSON.stringify(e.msg);
     msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
     if(msg.startsWith('ERROR')) {
-        showError("<p>Info Login:</p>"  + msg );
+        showError("<p>Info onForgotPassword:</p>"  + msg );
     }else {
-        showSuccess("<p>Info Login:</p>"  + msg );
+        showSuccess("<p>Info onForgotPassword:</p>"  + msg );
     }
 
 } 
