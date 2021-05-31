@@ -107,7 +107,7 @@ function callAjaxPost(e, myData) {
 ////////////////
 function ConfirmDialog(question, fctYes, fctNo) {
     $('<div></div>').appendTo('body')
-      .html('<div><h6>' + question + '</h6></div>')
+      .html('<div><h4>' + question + '</h4></div>')
       .dialog({
         modal: true,
         title: 'Confirmation',
