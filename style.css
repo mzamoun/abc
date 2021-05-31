@@ -93,13 +93,12 @@
         float: right;
       }    
   
-  .infos {
+  .info {
     font-size: 18px;
     padding: 10px;
     border: 1px;
     background: #000;
     color: blue;
-    float: right;
   }
   
   .err {
