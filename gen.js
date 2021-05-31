@@ -85,3 +85,23 @@ function enableElement(id, ok) {
 }
 ///////////////////
 
+function callAjaxPost(e, myData) {
+    e.preventDefault();
+    hideInfos();
+    
+    $.ajax({
+        type: 'POST',
+        crossDomain: true,
+        url: url ,
+        data: myData,
+        dataType: "jsonp",
+        success: function(e) {
+            console.log('success', e);
+        },
+        error: function(e) {
+            console.log('error', e);
+        },
+    });    
+}
+
+////////////////

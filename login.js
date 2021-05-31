@@ -93,8 +93,6 @@ function onLogin(e) {
 
 //////////////
 function onLoginClick(e) {
-    e.preventDefault();
-    hideInfos();
     
     var myData = {
         cmd: 'login',
@@ -103,19 +101,7 @@ function onLoginClick(e) {
         callbackFun : 'onLogin'
     };
     
-    $.ajax({
-        type: 'POST',
-        crossDomain: true,
-        url: url ,
-        data: myData,
-        dataType: "jsonp",
-        success: function(e) {
-            console.log('success', e);
-        },
-        error: function(e) {
-            console.log('error', e);
-        },
-    });    
+    callAjaxPost(e, myData);    
 }
 
 /////////////////////////////////
@@ -137,28 +123,13 @@ function onForgotPassword(e) {
 function onForgotPasswordClick(e) {
 
     if(!isEmail($("#username").val())) return;
-
-    e.preventDefault();
-    hideInfos();
-
+    
     var myData = {
         cmd: 'resetPass',
         email : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
         callbackFun : 'onForgotPassword'
     };
 
-    $.ajax({
-        type: 'POST',
-        crossDomain: true,
-        url: url ,
-        data: myData,
-        dataType: "jsonp",
-        success: function(e) {
-            console.log('success', e);
-        },
-        error: function(e) {
-            console.log('error', e);
-        },
-    });    
+    callAjaxPost(e, myData);  
 
 }
