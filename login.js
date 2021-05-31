@@ -50,15 +50,23 @@ function onConnected() {
     username = $("#username").val();
     setCookie("username", username);
     showMenu();
-    loadDiv("btnUserIcon",  username );
+    //loadDiv("btnUserIcon",  username );
     showAcceuil();
 
 }
 function onDisConnected() {
-    username = '';
-    setCookie("username", username);
-    loadDiv("btnUserIcon",  username );
-    showLogin();
+    ConfirmDialog('Do you want to disconnect ?', 
+        function() {
+            username = '';
+            setCookie("username", username);
+            showMenu();
+            showLogin();
+        },
+        function() {
+            ;
+        }
+    );
+
 
 }
 
@@ -123,7 +131,7 @@ function onForgotPassword(e) {
 function onForgotPasswordClick(e) {
 
     if(!isEmail($("#username").val())) return;
-    
+
     var myData = {
         cmd: 'resetPass',
         email : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
