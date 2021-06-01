@@ -30,6 +30,18 @@ function getCompoFormLogin() {
 }
 
 ///////////////////////////
+
+function saveLoginInBrowser() {
+    setCookie("username", username);
+    setCookie('userObj', JSON.stringify(userObj));
+}
+
+function restoreLoginInBrowser() {
+    username = getCookie('username');
+    userObj = JSON.parse(getCookie('userObj'));
+}
+
+///////////////////////////
 function addEventValidElement(el, listBtns) {
 
     for(var i=0; i<listBtns.length; i++) {
@@ -67,12 +79,11 @@ function isConnected() {
     return ok;
 }
 function onConnected(e) {
-    console.log('onConnected: ', e);
+    //console.log('onConnected: ', e);
     userObj = e.data;
     username = userObj.Email;
 
-    setCookie("username", username);
-    setCookie('userObj', JSON.stringify(userObj));
+    saveLoginInBrowser();
 
     showMenu();
     showAcceuil();
@@ -83,8 +94,7 @@ function onDisConnected() {
         function() {
             userObj='';
             username = '';
-            setCookie("username", username);
-            setCookie("userObj", userObj);
+            saveLoginInBrowser();
             showMenu();
             showLogin();
         },
@@ -99,22 +109,15 @@ function onDisConnected() {
   //////////////////
 
 function onLogin(e) {
-    console.log('onLogin: ', e);
-    var msg = JSON.stringify(e.msg);
-    msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
-    console.log('msg:' + msg+'.');
-    if(msg.startsWith('ERROR')) {
-        showError("<p>Info Login:</p>"  + msg );
-    }else {
+    if(isAjaxResultError(e, 'onLogin') != true) {
         onConnected(e);
     }
-
 } 
 
 //////////////
 function onLoginClick(e) {
 
-    console.log('onLoginClick: ', e);
+    //console.log('onLoginClick: ', e);
     
     var myData = {
         cmd: 'login',
@@ -129,15 +132,9 @@ function onLoginClick(e) {
 /////////////////////////////////
 
 function onForgotPassword(e) {
-    console.log(e);
-    var msg = JSON.stringify(e.msg);
-    msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
-    if(msg.startsWith('ERROR')) {
-        showError("<p>Info onForgotPassword:</p>"  + msg );
-    }else {
+    if(isAjaxResultError(e, 'onForgotPassword') != true) {
         showSuccess("<p>Info onForgotPassword:</p>"  + msg );
     }
-
 } 
 
 /////////////////////////////////

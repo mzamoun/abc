@@ -50,7 +50,7 @@ function getValElement(id) {
         s = el.val();
     }
 
-    return s;
+    return s.trim();
 }
 
 ///////////////////////
@@ -101,6 +101,7 @@ function enableElement(id, ok) {
 function callAjaxPost(e, myData) {
     e.preventDefault();
     hideInfos();
+    showSuccess('En chargement ...');
     
     $.ajax({
         type: 'POST',
@@ -109,13 +110,35 @@ function callAjaxPost(e, myData) {
         data: myData,
         dataType: "jsonp",
         success: function(ev) {
-            console.log('success', ev);
+            //console.log('success', ev);
+            showSuccess('Fin Chargement');
         },
         error: function(ev) {
-            console.log('error', ev);
-        },
+            //console.log('error', ev);
+            showSuccess('Fin Chargement');
+        }
     });    
 }
+///////////////
+function isAjaxResultError(e, fctName) {
+    var ok = false;
+    //console.log('isAjaxResultError: ', 'msg=/'+e.msg+'/');
+    if(e && e.msg) {
+        var msg = JSON.stringify(e.msg);
+        msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
+        if(msg.startsWith('ERROR')) {
+             showError('<p>'+fctName+':</p>'  + msg );
+        }else {
+            ok = true;
+        }
+    }else {
+        showError('<p>'+fctName+': No Information</p>' );
+    }
+
+    //console.log('isAjaxResultError: ', 'ok=/'+ok+'/');
+
+    return ok;
+ }
 
 ////////////////
 function ConfirmDialog(question, fctYes, fctNo) {
@@ -149,7 +172,7 @@ function ConfirmDialog(question, fctYes, fctNo) {
       });
   };
   /////////////////////////
-  function getCompoFormEdit(line, cols, colsType, idForm, fctSaveName, fctRefreshName){
+  function getCompoFormEdit(line, cols, colsType, idForm, fctRefreshName, fctSaveName ){
     var s = '';
     s = s + '<link rel="stylesheet" href="table.css">\n'
     s = s + '<form id="'+idForm+'">';
@@ -159,7 +182,7 @@ function ConfirmDialog(question, fctYes, fctNo) {
     for(var i=0; i<cols.length; i++) {
         var key = cols[i];
         var type = colsType[i];
-        var val = line[key];
+        var val = line[key].trim();
 
         s = s + '<tr>\n';
         s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
@@ -207,3 +230,50 @@ function ConfirmDialog(question, fctYes, fctNo) {
 }
 
 ///////////////////////////////////////
+
+  function getCompoListObject(line, cols, colsType, idForm, fctRefreshName, fctSaveName ){
+    var s = '';
+    s = s + '<link rel="stylesheet" href="table.css">\n'
+    s = s + '<form id="'+idForm+'">';
+        
+    s = s + '<h3 class="center"> User Profil: </h3>'
+    s = s+' <table class="form">'
+    for(var i=0; i<cols.length; i++) {
+        var key = cols[i];
+        var type = colsType[i];
+        var val = line[key].trim();
+
+        s = s + '<tr>\n';
+        s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
+        s = s + '  <td>';
+        if(type == 'textArea') {
+            s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50"> '+val+' </textarea> <br>\n';
+        }else {
+            s = s + '    <input type="text" size="50" name="'+key+'" id="'+key+'" value="'+val+'" >  <br>\n';            
+        }
+        s = s + '  </td>\n';
+        s = s + '</tr>\n';
+    }
+
+    s = s + '<tr>\n';
+    s = s + '  <td colspan="2">';
+    s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
+    s = s + '  <input type="submit" id="btnSave" value="Save">'
+    s = s + '  </td>\n';
+
+    s = s + '</tr>\n';
+
+    s = s + ' </table>'
+
+    s = s + '</form>'
+
+    s = s + '<script>'
+    s = s + '$(document).ready(function(){'
+    s = s + '   $("#btnRefresh").click(function(e){ '+fctRefreshName+'(e); });'
+    s = s + '   $("#btnSave").click(function(e){ '+fctSaveName+'(e); });'
+    s = s + ' }); '
+    s = s + '</script>'
+    return s;
+  }
+
+  /////////////////////////////////////

@@ -2,26 +2,15 @@ var cols = ['Prenom', 'Nom', 'Localisation', 'Site', 'Tel', 'Pays_Origine', 'Vil
 var colsType = ['text', 'text', 'text',        'text', 'text', 'text',        'text',           'text',  'textArea',                    'textArea'];
 
 function saveFormUser(e) {
-       // notImplemented();
-   console.log('saveFormUser', e);
-   if(e && e.msg) {
-       var msg = JSON.stringify(e.msg);
-       msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
-       console.log('msg:' + msg+'.');
-       if(msg.startsWith('ERROR')) {
-            showError("<p>saveFormUser:</p>"  + msg );
-       }else {
-            showSuccess("<p>saveFormUser: </p>"  + msg );
-       }
-   }else {
-       showError("<p>saveFormUser: No Information</p>" );
-   }
+    if(isAjaxResultError(e, 'saveFormUser') != true ) {
+        showSuccess("<p>saveFormUser: </p>"  + msg );
+    }
 }
 
 function onSaveFormUserClick(e) {
     e.preventDefault();
     userFormToObj(userObj, cols);
-    setCookie('userObj', JSON.stringify(userObj));
+    saveLoginInBrowser();
 
     var myData = {
         cmd: 'saveFormUser',
@@ -33,29 +22,21 @@ function onSaveFormUserClick(e) {
 }
 
 function showFormEditUser() {
-    console.log('DBG: showFormEditUser DEB');
-    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onSaveFormUserClick', 'onProfilUserFromDb'));
+    //console.log('DBG: showFormEditUser DEB');
+    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
     $('#compo').toggleClass('center');
 }
 
 function editProfilUser(e) {
-   // notImplemented();
-   console.log(e);
-   if(e && e.msg) {
-       var msg = JSON.stringify(e.msg);
-       msg = msg.substring(1, msg.length-1);   //supprimer les guillemets debut/fin
-       console.log('msg:' + msg+'.');
-       if(msg.startsWith('ERROR')) {
-            showError("<p>editProfilUser:</p>"  + msg );
-       }else {
-            userObj = e.data;
-            setCookie('userObj', JSON.stringify(userObj));
-            showFormEditUser();
-       }
-   }else {
-       showError("<p>No Information</p>" );
-   }
 
+    if(isAjaxResultError(e, 'editProfilUser') != 'true') {
+        userObj = e.data;
+        //console.log('editProfilUser', userObj)
+        saveLoginInBrowser();
+        showFormEditUser();
+    }else {
+        console.log('NON TRUE');
+    }
 }
 
 ////////
@@ -72,11 +53,12 @@ function onProfilUserFromDb(e) {
 
 ////////////////
 function onProfilUserClick(e) {
-    userObj = getCookie('userObj');
-    console.log('onProfilUserClick', userObj)
+
+    hideInfos();
+
+    restoreLoginInBrowser();
     
     if(userObj != null && userObj != '') {
-        userObj = JSON.parse(userObj)
         showFormEditUser();
     }else {
         onProfilUserFromDb(e);
