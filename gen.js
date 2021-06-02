@@ -17,6 +17,23 @@ String.prototype.sansAccent = function(){
      
     return str;
 }
+/////////////////////
+function getAnchorHttp(str) {
+    if(str == '') return str;
+
+    var s = str + '';
+    var tab = s.split(" ");
+    var s2 = '';
+    for(var i=0; i<tab.length; i++) {
+        var w = tab[i];
+        if(w != '' && w.startsWith('http') ) {
+            s2 = s2 + '<a href="' + w + '" target="_blank"> ' + w + ' </a><br>\n';
+        }else {
+            s2 = s2 + ' ' + w;
+        }
+    }
+    return (s2+'').trim();
+}
 
 ////////////////////
 var mapAccents = {
@@ -514,6 +531,7 @@ function getCompoListObjectDatas(lines, cols ){
             //console.log('DBG getCompoListObject key='+key, 'val:', val)
 
             var val = val.trim();
+            val = getAnchorHttp(val);
             s = s + '  <td>'+val+'</td>';
         }
         s = s + '</tr>\n';
