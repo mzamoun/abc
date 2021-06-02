@@ -6,8 +6,8 @@ function getCompoFormLogin() {
         
     s = s+' <div class="login">'
     s = s + '  <h3 class="center"> Connexion: </h3>'
-    s = s + '    <input type="text" placeholder="Email" id="username">  '
-    s = s + '    <input type="password" placeholder="Password" id="password">  '
+    s = s + '    <input type="text" placeholder="Email" id="username" autocomplete="username">  '
+    s = s + '    <input type="password" placeholder="Password" id="password" autocomplete="current-password">  '
 
     s = s + '        <a id="forgotPassword" href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>'
 
