@@ -35,6 +35,7 @@ function saveLoginInBrowser() {
     setCookie("username", username);
     setCookie('userObj', JSON.stringify(userObj));
     setCookie('usersObj', JSON.stringify(usersObj));
+    setCookie('usersObjFilter', JSON.stringify(usersObjFilter));
     setCookie('filtre', filtre);
 }
 
@@ -42,6 +43,8 @@ function restoreLoginInBrowser() {
     username = getCookie('username');
     userObj = JSON.parse(getCookie('userObj'));
     usersObj = JSON.parse(getCookie('usersObj'));
+    usersObjFilter = JSON.parse(getCookie('usersObjFilter'));
+    if(!usersObjFilter) usersObjFilter=[]
     filtre = getCookie('filtre');
 }
 

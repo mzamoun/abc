@@ -69,18 +69,26 @@ function onProfilUserClick(e) {
 
 /////////////////////////////////////////////////////////////////
 
+function showIhmProfilAllDatas(e) {
+    //console.log('showIhmProfilAllDatas: length:', usersObjFilter.length);
+    loadDiv('datas', getCompoListObjectDatas(usersObjFilter, cols) );
+//    loadDiv('datas', '' );
+}
+
 function showIhmProfilAll(e) {
     showCompo( getCompoListObject(usersObjFilter, cols, 'getProfilAllFromDbAjax', 'searchProfilAll', filtre));
     $('#compo').toggleClass('center');
 }
 
 function searchProfilAll(e, filtreIhm) {
-   // e.preventDefault();
-    filtre = filtreIhm;
+    //e.preventDefault();
+    filtre = filtreIhm + '';
+    filtre = replaceAccents(filtre);
+    //filtre = filtre.normalize().toUpperCase();
 
-    console.log('searchProfilAll: filtre: ', filtre)
+    //console.log('searchProfilAll: filtre: ', filtre)
 
-    var usersObjFilter = [];
+    usersObjFilter = [];
     var words00 = null;
     var words = null;
     if(filtre) words00 = filtre.replaceAll(",", " ").split(" ");
@@ -97,43 +105,56 @@ function searchProfilAll(e, filtreIhm) {
         }
     }
 
-    var add = false;
-    if(words == null) add = true;
+    //console.log('searchProfilAll: words: ', words)
+    //console.log('searchProfilAll: usersObj.length: ', usersObj.length)
 
     if(usersObj) {
         for(var i=0; i<usersObj.length; i++) {
             var u = usersObj[i];
-            var isAdded = false;
-            if(words){
+            var isAdded = true;
+            if(words && words.length > 0){
+                
                 for(var k=0; k<words.length; k++) {
-                    var w = words[k].toUpperCase();
+                    var w = (words[k]+'').toUpperCase();
+                   // console.log('w:', w);
+                    var isContain = false;
                     for(var j=0; j<cols.length; j++) {
                         var key = cols[j];
                         var val = u[key] + '';
-                        var val = val.trim().toUpperCase();
+                        val = replaceAccents(val);
+                        val = val.trim().toUpperCase();
+                       // console.log('val:', val);
                         if( val.includes(w) ) {
-                            isAdded = true;
-                            usersObjFilter.push(u);
+                            isContain = true;
                             break;
                         }
-                    }  
-                    if(isAdded) {
+                    }
+                    if(!isContain) {
+                        isAdded=false;
                         break;
-                    }                  
+                    }
                 }
+                if(isAdded) {
+                    usersObjFilter.push(u);
+                }                  
             }else {
                 usersObjFilter.push(u);
             }
         }
     }
+
+    // console.log('searchProfilAll: usersObjFilter.length: ', usersObjFilter.length)
+
     saveLoginInBrowser();
-    showIhmProfilAll(e);
+    showIhmProfilAllDatas(e);
 }
 
 function getProfilAllFromDbCallback(e) {
 
     if(!isAjaxResultError(e, 'getProfilUsersFromDbCallback')) {
+        filtre = '';
         usersObj = e.data;
+        usersObjFilter = usersObj;
         //console.log('getProfilUsersFromDbCallback', usersObj)
         saveLoginInBrowser();
         showIhmProfilAll();
