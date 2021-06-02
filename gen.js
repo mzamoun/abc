@@ -49,6 +49,7 @@ function getValElement(id) {
     if(el) {
         s = el.val();
     }
+    s = s + '';
 
     return s.trim();
 }
@@ -194,7 +195,8 @@ function ConfirmDialog(question, fctYes, fctNo) {
     for(var i=0; i<cols.length; i++) {
         var key = cols[i];
         var type = colsType[i];
-        var val = line[key].trim();
+        var val = line[key];
+        var val = val.trim();
 
         s = s + '<tr>\n';
         s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
@@ -243,14 +245,14 @@ function ConfirmDialog(question, fctYes, fctNo) {
 
 ///////////////////////////////////////
 
-  function getCompoListObject(lines, cols, fctRefreshName, fctSearchName ){
+  function getCompoListObject(lines, cols, fctRefreshName, fctSearchName, varFiltre ){
     var s = '';
     s = s + '<link rel="stylesheet" href="table.css">\n'
         
     s = s + '<h3 class="center"> Users Profil: </h3>'
     
     s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
-    s = s + '  <input type="text" id="btnSearch" size="100">'
+    s = s + '  <input type="text" id="btnSearch" placeholder="filter key words" size="100" value="'+varFiltre+'" >'
 
     s = s + '</tr>\n';
 
@@ -263,12 +265,16 @@ function ConfirmDialog(question, fctYes, fctNo) {
     }
     s = s + '</tr>\n';
 
-    for(var j=0; i<lines.length; i++) {
+    for(var j=0; j<lines.length; j++) {
         var line = lines[j];
+        //console.log('DBG getCompoListObject line='+line, line)
         s = s + '<tr>\n';
         for(var i=0; i<cols.length; i++) {
             var key = cols[i];
-            var val = line[key].trim();
+            var val = line[key]+'';
+            //console.log('DBG getCompoListObject key='+key, 'val:', val)
+
+            var val = val.trim();
             s = s + '  <td>'+val+'</td>';
         }
         s = s + '</tr>\n';
@@ -280,7 +286,8 @@ function ConfirmDialog(question, fctYes, fctNo) {
     s = s + '<script>'
     s = s + '$(document).ready(function(){'
     s = s + '   $("#btnRefresh").click(function(e){ '+fctRefreshName+'(e); });'
-    s = s + '   $("#btnSave").keyup(function(e){ '+fctSearchName+'(e); });'
+    s = s + '   $("#btnSearch").keyup(function(e){ '+fctSearchName+'(e, $("#btnSearch").val()); });'
+    s = s + '   $("#btnSearch").focus();'
     s = s + ' }); '
     s = s + '</script>'
     return s;

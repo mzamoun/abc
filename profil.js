@@ -69,35 +69,86 @@ function onProfilUserClick(e) {
 
 /////////////////////////////////////////////////////////////////
 
-function showProfilAll(e) {
-    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
-}
-
-function showFormEditUser() {
-    //console.log('DBG: showFormEditUser DEB');
-    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
+function showIhmProfilAll(e) {
+    showCompo( getCompoListObject(usersObjFilter, cols, 'getProfilAllFromDbAjax', 'searchProfilAll', filtre));
     $('#compo').toggleClass('center');
 }
 
-function getProfilUsersFromDbCallback(e) {
+function searchProfilAll(e, filtreIhm) {
+   // e.preventDefault();
+    filtre = filtreIhm;
+
+    console.log('searchProfilAll: filtre: ', filtre)
+
+    var usersObjFilter = [];
+    var words00 = null;
+    var words = null;
+    if(filtre) words00 = filtre.replaceAll(",", " ").split(" ");
+    if(words00){
+        words = [];
+        for(var k=0; k<words00.length; k++) {
+            var w = words00[k];
+            if(w) {
+                words.push(w);
+            }
+        }
+        if(words.length == 0) {
+            words = null;
+        }
+    }
+
+    var add = false;
+    if(words == null) add = true;
+
+    if(usersObj) {
+        for(var i=0; i<usersObj.length; i++) {
+            var u = usersObj[i];
+            var isAdded = false;
+            if(words){
+                for(var k=0; k<words.length; k++) {
+                    var w = words[k].toUpperCase();
+                    for(var j=0; j<cols.length; j++) {
+                        var key = cols[j];
+                        var val = u[key] + '';
+                        var val = val.trim().toUpperCase();
+                        if( val.includes(w) ) {
+                            isAdded = true;
+                            usersObjFilter.push(u);
+                            break;
+                        }
+                    }  
+                    if(isAdded) {
+                        break;
+                    }                  
+                }
+            }else {
+                usersObjFilter.push(u);
+            }
+        }
+    }
+    saveLoginInBrowser();
+    showIhmProfilAll(e);
+}
+
+function getProfilAllFromDbCallback(e) {
 
     if(!isAjaxResultError(e, 'getProfilUsersFromDbCallback')) {
         usersObj = e.data;
         //console.log('getProfilUsersFromDbCallback', usersObj)
         saveLoginInBrowser();
-        showIhmUsers();
+        showIhmProfilAll();
     }else {
         console.log('getProfilUsersFromDbCallback NON TRUE');
     }
 }
 
 ////////
-function getProfilUsersFromDbAjax(e) {
+function getProfilAllFromDbAjax(e) {
     
     var myData = {
-        cmd: 'getProfilUsers',
-        filtre : filtre,
-        callbackFun : 'getProfilUsersFromDbCallback'
+        cmd: 'getProfilAll',
+        //filtre : filtre,
+        callbackFun : 'getProfilAllFromDbCallback'
     };
     
    callAjaxPost(e, myData);  
@@ -111,7 +162,7 @@ function getProfilAllClick(e) {
     restoreLoginInBrowser();
     
     if(usersObj != null && usersObj != '') {
-        showIhmUsers();
+        showIhmProfilAll();
     }else {
         getProfilAllFromDbAjax(e);
     } 

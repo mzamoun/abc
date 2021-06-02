@@ -35,12 +35,14 @@ function saveLoginInBrowser() {
     setCookie("username", username);
     setCookie('userObj', JSON.stringify(userObj));
     setCookie('usersObj', JSON.stringify(usersObj));
+    setCookie('filtre', filtre);
 }
 
 function restoreLoginInBrowser() {
     username = getCookie('username');
     userObj = JSON.parse(getCookie('userObj'));
     usersObj = JSON.parse(getCookie('usersObj'));
+    filtre = getCookie('filtre');
 }
 
 ///////////////////////////
