@@ -34,11 +34,13 @@ function getCompoFormLogin() {
 function saveLoginInBrowser() {
     setCookie("username", username);
     setCookie('userObj', JSON.stringify(userObj));
+    setCookie('usersObj', JSON.stringify(usersObj));
 }
 
 function restoreLoginInBrowser() {
     username = getCookie('username');
     userObj = JSON.parse(getCookie('userObj'));
+    usersObj = JSON.parse(getCookie('usersObj'));
 }
 
 ///////////////////////////
@@ -109,8 +111,10 @@ function onDisConnected() {
   //////////////////
 
 function onLogin(e) {
-    if(isAjaxResultError(e, 'onLogin') != true) {
+    if(!isAjaxResultError(e, 'onLogin')) {
         onConnected(e);
+    }else {
+        console.log('onLogin NON TRUE');
     }
 } 
 
@@ -132,8 +136,10 @@ function onLoginClick(e) {
 /////////////////////////////////
 
 function onForgotPassword(e) {
-    if(isAjaxResultError(e, 'onForgotPassword') != true) {
-        showSuccess("<p>Info onForgotPassword:</p>"  + msg );
+    if(!isAjaxResultError(e, 'onForgotPassword') ) {
+        showSuccess("<p>Info onForgotPassword:</p>"  + e.msg );
+    }else {
+        console.log('onForgotPassword NON TRUE');
     }
 } 
 

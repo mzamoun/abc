@@ -2,8 +2,10 @@ var cols = ['Prenom', 'Nom', 'Localisation', 'Site', 'Tel', 'Pays_Origine', 'Vil
 var colsType = ['text', 'text', 'text',        'text', 'text', 'text',        'text',           'text',  'textArea',                    'textArea'];
 
 function saveFormUser(e) {
-    if(isAjaxResultError(e, 'saveFormUser') != true ) {
-        showSuccess("<p>saveFormUser: </p>"  + msg );
+    if(!isAjaxResultError(e, 'saveFormUser') ) {
+        showSuccess("<p>saveFormUser: </p>"  + e.msg );
+    }else {
+        console.log('saveFormUser NON TRUE');
     }
 }
 
@@ -29,13 +31,13 @@ function showFormEditUser() {
 
 function editProfilUser(e) {
 
-    if(isAjaxResultError(e, 'editProfilUser') != 'true') {
+    if(!isAjaxResultError(e, 'editProfilUser')) {
         userObj = e.data;
         //console.log('editProfilUser', userObj)
         saveLoginInBrowser();
         showFormEditUser();
     }else {
-        console.log('NON TRUE');
+        console.log('editProfilUser NON TRUE');
     }
 }
 
@@ -65,8 +67,54 @@ function onProfilUserClick(e) {
     } 
 }
 
-////////////
+/////////////////////////////////////////////////////////////////
 
-function showProfilAll() {
-    notImplemented();
+function showProfilAll(e) {
+    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
 }
+
+function showFormEditUser() {
+    //console.log('DBG: showFormEditUser DEB');
+    showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
+    $('#compo').toggleClass('center');
+}
+
+function getProfilUsersFromDbCallback(e) {
+
+    if(!isAjaxResultError(e, 'getProfilUsersFromDbCallback')) {
+        usersObj = e.data;
+        //console.log('getProfilUsersFromDbCallback', usersObj)
+        saveLoginInBrowser();
+        showIhmUsers();
+    }else {
+        console.log('getProfilUsersFromDbCallback NON TRUE');
+    }
+}
+
+////////
+function getProfilUsersFromDbAjax(e) {
+    
+    var myData = {
+        cmd: 'getProfilUsers',
+        filtre : filtre,
+        callbackFun : 'getProfilUsersFromDbCallback'
+    };
+    
+   callAjaxPost(e, myData);  
+}
+
+////////////////
+function getProfilAllClick(e) {
+
+    hideInfos();
+
+    restoreLoginInBrowser();
+    
+    if(usersObj != null && usersObj != '') {
+        showIhmUsers();
+    }else {
+        getProfilAllFromDbAjax(e);
+    } 
+}
+
+/////////////////////////////////////////////////////////////////

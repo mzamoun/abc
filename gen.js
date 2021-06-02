@@ -69,6 +69,7 @@ function showDiv(idDiv, ok) {
 ////////////
 function hideInfos() {
     showDiv('success', false);
+    showDiv('chargement', false);
     showDiv('error', false);
 }
 ////
@@ -82,6 +83,17 @@ function showError(msg) {
     var id = 'error';
     loadDiv(id, msg)
     showDiv(id, true);
+}
+//////
+function showChargement(msg) {
+    var id = 'chargement';
+    loadDiv(id, msg)
+    showDiv(id, true);
+}
+//////////
+function hideChargement() {
+    var id = 'chargement';
+    showDiv(id, false);
 }
 ///////////////////////////
 
@@ -101,7 +113,7 @@ function enableElement(id, ok) {
 function callAjaxPost(e, myData) {
     e.preventDefault();
     hideInfos();
-    showSuccess('En chargement ...');
+    showChargement('En chargement ...');
     
     $.ajax({
         type: 'POST',
@@ -111,17 +123,17 @@ function callAjaxPost(e, myData) {
         dataType: "jsonp",
         success: function(ev) {
             //console.log('success', ev);
-            showSuccess('Fin Chargement');
+            hideChargement();
         },
         error: function(ev) {
             //console.log('error', ev);
-            showSuccess('Fin Chargement');
+            hideChargement();
         }
     });    
 }
 ///////////////
 function isAjaxResultError(e, fctName) {
-    var ok = false;
+    var ok = true;
     //console.log('isAjaxResultError: ', 'msg=/'+e.msg+'/');
     if(e && e.msg) {
         var msg = JSON.stringify(e.msg);
@@ -129,7 +141,7 @@ function isAjaxResultError(e, fctName) {
         if(msg.startsWith('ERROR')) {
              showError('<p>'+fctName+':</p>'  + msg );
         }else {
-            ok = true;
+            ok = false;
         }
     }else {
         showError('<p>'+fctName+': No Information</p>' );
@@ -231,46 +243,44 @@ function ConfirmDialog(question, fctYes, fctNo) {
 
 ///////////////////////////////////////
 
-  function getCompoListObject(line, cols, colsType, idForm, fctRefreshName, fctSaveName ){
+  function getCompoListObject(lines, cols, fctRefreshName, fctSearchName ){
     var s = '';
     s = s + '<link rel="stylesheet" href="table.css">\n'
-    s = s + '<form id="'+idForm+'">';
         
-    s = s + '<h3 class="center"> User Profil: </h3>'
-    s = s+' <table class="form">'
-    for(var i=0; i<cols.length; i++) {
-        var key = cols[i];
-        var type = colsType[i];
-        var val = line[key].trim();
-
-        s = s + '<tr>\n';
-        s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
-        s = s + '  <td>';
-        if(type == 'textArea') {
-            s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50"> '+val+' </textarea> <br>\n';
-        }else {
-            s = s + '    <input type="text" size="50" name="'+key+'" id="'+key+'" value="'+val+'" >  <br>\n';            
-        }
-        s = s + '  </td>\n';
-        s = s + '</tr>\n';
-    }
-
-    s = s + '<tr>\n';
-    s = s + '  <td colspan="2">';
+    s = s + '<h3 class="center"> Users Profil: </h3>'
+    
     s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
-    s = s + '  <input type="submit" id="btnSave" value="Save">'
-    s = s + '  </td>\n';
+    s = s + '  <input type="text" id="btnSearch" size="100">'
 
     s = s + '</tr>\n';
 
-    s = s + ' </table>'
+    s = s+' <table class="table">'
 
-    s = s + '</form>'
+    s = s + '<tr>\n';
+    for(var i=0; i<cols.length; i++) {
+        var key = cols[i];
+        s = s + '  <th>'+key+'</th>';
+    }
+    s = s + '</tr>\n';
+
+    for(var j=0; i<lines.length; i++) {
+        var line = lines[j];
+        s = s + '<tr>\n';
+        for(var i=0; i<cols.length; i++) {
+            var key = cols[i];
+            var val = line[key].trim();
+            s = s + '  <td>'+val+'</td>';
+        }
+        s = s + '</tr>\n';
+    }
+
+
+    s = s + ' </table>'
 
     s = s + '<script>'
     s = s + '$(document).ready(function(){'
     s = s + '   $("#btnRefresh").click(function(e){ '+fctRefreshName+'(e); });'
-    s = s + '   $("#btnSave").click(function(e){ '+fctSaveName+'(e); });'
+    s = s + '   $("#btnSave").keyup(function(e){ '+fctSearchName+'(e); });'
     s = s + ' }); '
     s = s + '</script>'
     return s;
