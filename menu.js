@@ -20,16 +20,21 @@ function getCompoMenuLogin() {
 }
 
 function getCompoMenuLoged() {
+    restoreLoginInBrowser();
+
     var s = '';
 
     s = s +  '                <div class="nav-item dropdown btnUserIcon">'
     s = s +  '                    <div class="dropdown-toggle btnUserIcon" id="btnUserIcon" data-toggle="dropdown">'
     s = s +  '                      Dropdown User'
     s = s +  '                    </div>'
-    s = s +  '                    <div class="dropdown-menu btnMenu" > '
-    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu" onclick="onDisConnected()" >Disconnect</button> </a> '
-    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu" onclick="onProfilUserClick(event)" >Profil User</button> </a> '
+    s = s +  '                    <div class="dropdown-menu btnMenu box" > '
     s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu" onclick="getProfilAllClick(event)" >Profil All</button> </a> '
+    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu" onclick="onProfilUserClick(event)" >Profil User</button> </a> '
+    s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu" onclick="onDisConnected()" >Disconnect</button> </a> '
+    if(userObj.Admin ) {
+        s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuAdmin" class="btnMenu" onclick="onMenuAdminClick(event)" >Admin</button> </a> '
+    }
     s = s +  '                    </div>'
     s = s +  '                </div>'
 

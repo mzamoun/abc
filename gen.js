@@ -555,8 +555,6 @@ function getCompoListObjectDatas(lines, cols ){
 
     s = s + '<div id="datas">\n'
 
-    s = s + '<h3 class="center"> Users Profil: '+ lines.length +' </h3>'
-    
     s = s + getCompoListObjectDatas(lines, cols);
 
     s = s + '</div>\n'
