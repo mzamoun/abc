@@ -71,7 +71,7 @@ function addEventValidUsername(listBtns) {
 ////////////
 
 function showLogin() {
-    //loadDiv("menu",  '' );
+    hideInfos();
     loadDiv("compo",  getCompoFormLogin() );
 }
 
