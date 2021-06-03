@@ -1,0 +1,18 @@
+* chat multi rooms; admin : gestion de rooms
+    . chaq room est une tab : Horodateur, username, prenom, nom, text
+    . ihm : 
+        . au debut, on charge les 100 derniers; un bouton pour charger les 100 avant; 
+        . chaque chat : 
+            head : date, prenom nom
+            corps : textArea of text : max 1000 caracteres.
+            si on click sur "prenom nom", on affiche une popup of profil of user.
+                . on peut lui envoyer un msg privé : tab : user1-user2 
+
+----------
+* var colsLabel : les labels ihm correspondants aux noms de cols 
+* ajouter un champ TA : divers , dans profil 
+* ajouter un champ: TA : services : 2000 car : quels sont vos compétences, produits, ...
+* ajouter un champ: TA : besoins : 2000 car : quels sont vos besoins, recherches, ...
+* ajouter un champ: TA : liens : 2000 car : peut contenir des liens videos, sites, ...
+* limiter les champs : text : 500 car ; TA : 2000 car. 
+-------
