@@ -473,7 +473,7 @@ function ConfirmDialog(question, fctYes, fctNo) {
 
     s = s + '<tr>\n';
     s = s + '  <td colspan="2">';
-    s = s + '  <input type="submit" id="btnSave" value="'+btnSaveName+'">'
+    s = s + '  <input type="submit" id="btnSave" value="'+btnSaveName+'" class="btn">'
     s = s + '  </td>\n';
 
     s = s + '</tr>\n';
