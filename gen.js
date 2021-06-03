@@ -445,6 +445,52 @@ function ConfirmDialog(question, fctYes, fctNo) {
         }
       });
   };
+
+  /////////////////////////
+  function getCompoFormAddObject(cols, colsType, idForm, fctSaveName, title ){
+    var s = '';
+    s = s + '<link rel="stylesheet" href="table.css">\n'
+    s = s + '<form id="'+idForm+'">';
+        
+    s = s + '<h3 class="center"> '+title+': </h3>'
+    s = s+' <table class="form">'
+    for(var i=0; i<cols.length; i++) {
+        var key = cols[i];
+        var type = colsType[i];
+
+        s = s + '<tr>\n';
+        s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
+        s = s + '  <td>';
+        if(type == 'textArea') {
+            s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50">  </textarea> <br>\n';
+        }else {
+            s = s + '    <input type="text" size="50" name="'+key+'" id="'+key+'" >  <br>\n';            
+        }
+        s = s + '  </td>\n';
+        s = s + '</tr>\n';
+    }
+
+    s = s + '<tr>\n';
+    s = s + '  <td colspan="2">';
+    s = s + '  <input type="submit" id="btnSave" value="Save">'
+    s = s + '  </td>\n';
+
+    s = s + '</tr>\n';
+
+    s = s + ' </table>'
+
+    s = s + '</form>'
+
+    s = s + '<script>'
+    s = s + '$(document).ready(function(){'
+    s = s + '   $("#btnSave").click(function(e){ '+fctSaveName+'(e); });'
+    s = s + ' }); '
+    s = s + '</script>'
+    return s;
+  }
+
+  /////////////////////
+
   /////////////////////////
   function getCompoFormEdit(line, cols, colsType, idForm, fctRefreshName, fctSaveName ){
     var s = '';
@@ -456,8 +502,8 @@ function ConfirmDialog(question, fctYes, fctNo) {
     for(var i=0; i<cols.length; i++) {
         var key = cols[i];
         var type = colsType[i];
-        var val = line[key];
-        var val = val.trim();
+        var val = line[key]+'';
+        val = val.trim();
 
         s = s + '<tr>\n';
         s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';

@@ -67,6 +67,30 @@ function onProfilUserClick(e) {
     } 
 }
 
+//////////////////////////////////////////////////////////////////
+
+function addUserCallback(e) {
+    if(!isAjaxResultError(e, 'addUserCallback') ) {
+        showSuccess("<p>addUserCallback: </p>"  + e.msg );
+    }else {
+        console.log('addUserCallback NON TRUE');
+    }
+}
+
+function onAddUserClick(e) {
+    e.preventDefault();
+    var user = {};
+    userFormToObj(user, cols);
+
+    var myData = {
+        cmd: 'addUser',
+        user : JSON.stringify(user),
+        callbackFun : 'addUserCallback'
+    };
+    
+    callAjaxPost(e, myData);
+}
+
 /////////////////////////////////////////////////////////////////
 
 function showIhmProfilAllDatas(e) {
