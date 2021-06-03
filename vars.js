@@ -1,6 +1,19 @@
-var url = 'https://script.google.com/macros/s/AKfycbyx_o9CXQ2NPZ2v0yODOaqXfwQnFvNz9iziKkEnr1-yBLAkv3DWONxyoh8KjLEDypzg/exec';
+var url = 'https://script.google.com/macros/s/AKfycbxMihYsROr2rj1LbR0-b9l-Ety-ZiadDTbi7r_LK5vFlHQTqSoZzq7ZOZLIKuKsMhrU/exec';
 var username='';
 var userObj = '';
 var filtre = '';
 var usersObj = '';
 var usersObjFilter = [];
+
+var cols = ['Prenom', 'Nom', 'Localisation', 'Site', 'Tel', 'Pays_Origine', 'Ville_Origine', 'Metier', 'Expertises_Centre_Interrets', 'Proposition_Idees'];
+var colsType = ['text', 'text', 'text',        'text', 'text', 'text',        'text',           'text',  'textArea',                    'textArea'];
+var colsMandatory = ['*', '*', '',            '',      '',    '',               '',            '',         '',                             ''];
+
+var colsWithEmail = cols;
+colsWithEmail.splice(0, 0, 'Email');
+
+var colsTypeWithEmail = colsType;
+colsTypeWithEmail.splice(0, 0, 'text');
+
+var colsMandatoryWithEmail = colsMandatory;
+colsMandatoryWithEmail.splice(0, 0, '*');

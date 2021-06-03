@@ -14,7 +14,7 @@ function showMenu() {
 function getCompoMenuLogin() {
     var s = '';
 
-    s = s +  '                <button id="menuLogin" class="btnMenu btnUserIcon" onclick="showLogin()" >Login</button> '
+    s = s +  '                <button id="menuLogin" class="btnMenu btnUserIcon btn" onclick="showLogin()" >Login</button> '
 
     return s;
 }
@@ -33,7 +33,7 @@ function getCompoMenuLoged() {
     s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu" onclick="onProfilUserClick(event)" >Profil User</button> </a> '
     s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu" onclick="onDisConnected()" >Disconnect</button> </a> '
     if(userObj.Admin ) {
-        s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuAdmin" class="btnMenu" onclick="getCompoFormAddProfil(event)" >Admin</button> </a> '
+        s = s +  '                          <a class="dropdown-item btnMenu" > <button id="menuAdmin" class="btnMenu" onclick="getCompoAdmin(event)" >Admin</button> </a> '
     }
     s = s +  '                    </div>'
     s = s +  '                </div>'

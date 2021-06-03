@@ -1,11 +1,3 @@
-var cols = ['Prenom', 'Nom', 'Localisation', 'Site', 'Tel', 'Pays_Origine', 'Ville_Origine', 'Metier', 'Expertises_Centre_Interrets', 'Proposition_Idees'];
-var colsType = ['text', 'text', 'text',        'text', 'text', 'text',        'text',           'text',  'textArea',                    'textArea'];
-
-var colsWithEmail = cols;
-colsWithEmail.splice(0, 0, 'Email');
-
-var colsTypeWithEmail = colsType;
-colsTypeWithEmail.splice(0, 0, 'text');
 
 function saveFormUser(e) {
     if(!isAjaxResultError(e, 'saveFormUser') ) {
@@ -75,6 +67,21 @@ function onProfilUserClick(e) {
 
 //////////////////////////////////////////////////////////////////
 
+function isValidAddUser(user) {
+    if(!isEmail(user.Email)) {
+        showError('Email not correct: ' + user.Email);
+        return false;
+    }else if( ! user.Prenom ) {
+        showError('Prenom is mandatory ');
+        return false;
+    } else if( ! user.Nom ) {
+        showError('Nom is mandatory ');
+        return false;
+    }
+
+    return true;
+}
+
 function addUserCallback(e) {
     if(!isAjaxResultError(e, 'addUserCallback') ) {
         showSuccess("<p>addUserCallback: </p>"  + e.msg );
@@ -87,7 +94,8 @@ function onAddUserClick(e) {
     e.preventDefault();
     var user = {};
     userFormToObj(user, colsWithEmail);
-    console.log('onAddUserClick user:', user);
+
+    if(!isValidAddUser(user)) return;
 
     var myData = {
         cmd: 'addUser',
@@ -97,6 +105,37 @@ function onAddUserClick(e) {
     
     callAjaxPost(e, myData);
 }
+
+///////////
+
+function delUserCallback(e) {
+    if(!isAjaxResultError(e, 'delUserCallback') ) {
+        showSuccess("<p>delUserCallback: </p>"  + e.msg );
+    }else {
+        console.log('delUserCallback NON TRUE');
+    }
+}
+
+function onDelUserClick(e) {
+    e.preventDefault();
+    var user = {};
+    userFormToObj(user, ['Email']);
+
+    if(!isEmail(user.Email)) {
+        showError('Email not valid : ' + user.Email);
+        return;
+    }
+
+    var myData = {
+        cmd: 'delUser',
+        email : user.Email,
+        callbackFun : 'delUserCallback'
+    };
+    
+    callAjaxPost(e, myData);
+}
+
+
 
 /////////////////////////////////////////////////////////////////
 

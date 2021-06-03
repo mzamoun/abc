@@ -447,7 +447,7 @@ function ConfirmDialog(question, fctYes, fctNo) {
   };
 
   /////////////////////////
-  function getCompoFormAddObject(cols, colsType, idForm, fctSaveName, title ){
+  function getCompoFormSaveObject(cols, colsType, colsMandatory, idForm, fctSaveName, title, btnSaveName ){
     var s = '';
     s = s + '<link rel="stylesheet" href="table.css">\n'
     s = s + '<form id="'+idForm+'">';
@@ -457,9 +457,10 @@ function ConfirmDialog(question, fctYes, fctNo) {
     for(var i=0; i<cols.length; i++) {
         var key = cols[i];
         var type = colsType[i];
+        var mandatory = colsMandatory[i];
 
         s = s + '<tr>\n';
-        s = s + '  <td>  <label for="'+key+'">'+key+'</label> </td>';
+        s = s + '  <td>  <label for="'+key+'">'+key+' ' + mandatory + '</label> </td>';
         s = s + '  <td>';
         if(type == 'textArea') {
             s = s + '    <textarea name="'+key+'" id="'+key+'" rows="4" cols="50">  </textarea> <br>\n';
@@ -472,7 +473,7 @@ function ConfirmDialog(question, fctYes, fctNo) {
 
     s = s + '<tr>\n';
     s = s + '  <td colspan="2">';
-    s = s + '  <input type="submit" id="btnSave" value="Save">'
+    s = s + '  <input type="submit" id="btnSave" value="'+btnSaveName+'">'
     s = s + '  </td>\n';
 
     s = s + '</tr>\n';
@@ -519,8 +520,8 @@ function ConfirmDialog(question, fctYes, fctNo) {
 
     s = s + '<tr>\n';
     s = s + '  <td colspan="2">';
-    s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
-    s = s + '  <input type="submit" id="btnSave" value="Save">'
+    s = s + '  <input type="button" id="btnRefresh" value="Refresh" class="btn">'
+    s = s + '  <input type="submit" id="btnSave" value="Save" class="btn">'
     s = s + '  </td>\n';
 
     s = s + '</tr>\n';
@@ -596,8 +597,8 @@ function getCompoListObjectDatas(lines, cols ){
     var s = '';
     s = s + '<link rel="stylesheet" href="table.css">\n'
     
-    s = s + '  <input type="button" id="btnRefresh" value="Refresh">'
-    s = s + '  <input type="text" id="btnSearch" placeholder="filter key words" size="100" value="'+varFiltre+'" >'
+    s = s + '  <input type="button" id="btnRefresh" value="Refresh" class="btn">'
+    s = s + '  <input type="text" id="btnSearch" placeholder="filter key words" size="70" value="'+varFiltre+'" >'
 
     s = s + '<div id="datas">\n'
 
