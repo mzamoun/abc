@@ -59,6 +59,17 @@
     background: #ddd;
     color: black;
   }
+
+  .btn {
+    width: 200px; 
+   /* height: 20px; */
+   border: 2px solid #000;
+   margin: 10px;
+   text-align: center;
+   padding: 10px;
+   font-weight: bold;
+   border-radius: 10px;
+ }
   
   .btnMenu {
     font-size: 18px;
@@ -68,7 +79,7 @@
     color: #fff;
     cursor: pointer;
     float: right;
-    margin-top: 5px;
+    margin: 5px;
 
   }
   
@@ -124,13 +135,3 @@
     background-repeat:no-repeat;
   }
 
-  .btn {
-     width: 200px; 
-    /* height: 20px; */
-    border: 2px solid #000;
-    margin: 10px;
-    text-align: center;
-    padding: 10px;
-    font-weight: bold;
-    border-radius: 10px;
-  }
