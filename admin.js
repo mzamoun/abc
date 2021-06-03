@@ -1,5 +1,6 @@
-function getCompoFormAddProfil() {
-    showCompo( getCompoFormAddObject(cols, colsType, 'addObjectForm', 'onAddUserClick', 'Add Profil' ) );
+function getCompoFormAddProfil(e) {
+    e.preventDefault();
+    showCompo( getCompoFormAddObject(colsWithEmail, colsTypeWithEmail, 'addObjectForm', 'onAddUserClick', 'Add Profil' ) );
 }
 
 ///////////////////////////

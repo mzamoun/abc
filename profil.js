@@ -1,6 +1,12 @@
 var cols = ['Prenom', 'Nom', 'Localisation', 'Site', 'Tel', 'Pays_Origine', 'Ville_Origine', 'Metier', 'Expertises_Centre_Interrets', 'Proposition_Idees'];
 var colsType = ['text', 'text', 'text',        'text', 'text', 'text',        'text',           'text',  'textArea',                    'textArea'];
 
+var colsWithEmail = cols;
+colsWithEmail.splice(0, 0, 'Email');
+
+var colsTypeWithEmail = colsType;
+colsTypeWithEmail.splice(0, 0, 'text');
+
 function saveFormUser(e) {
     if(!isAjaxResultError(e, 'saveFormUser') ) {
         showSuccess("<p>saveFormUser: </p>"  + e.msg );
@@ -80,7 +86,8 @@ function addUserCallback(e) {
 function onAddUserClick(e) {
     e.preventDefault();
     var user = {};
-    userFormToObj(user, cols);
+    userFormToObj(user, colsWithEmail);
+    console.log('onAddUserClick user:', user);
 
     var myData = {
         cmd: 'addUser',
