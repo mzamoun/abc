@@ -209,13 +209,27 @@ function getInfosOnEnter() {
             function(data) {
                 userIp = data.ip;
                 console.log('userIp', userIp)
-                $.getJSON('https://ip-api.com/json/' + userIp, 
+                $.getJSON('http://ip-api.com/json/' + userIp, 
                     function(dd) {
                         userGeo = dd;
                         console.log('userGeo', userGeo)
                         //console.log(userGeo.country + ', ' + userGeo.city)
                     }
-                )
+                );
+                // $.ajax({
+                //     type: 'GET',
+                //     crossDomain: true,
+                //     url: 'https://ip-api.com/json/' + userIp ,
+                //     //data: myData,
+                //     dataType: "jsonp",
+                //     success: function(data2) {
+                //         userGeo = data2;
+                //         console.log('userGeo', userGeo)
+                //     },
+                //     error: function(err2) {
+                //         console.log('call geo : error', err2);
+                //     }
+                // });
             }
         
         );
