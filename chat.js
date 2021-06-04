@@ -1,0 +1,3 @@
+function onChatClick(ev) {
+    notImplemented();
+}
