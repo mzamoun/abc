@@ -29,12 +29,12 @@ function getCompoMenuLoged() {
     s = s +  '                      Dropdown User'
     s = s +  '                    </div>'
     s = s +  '                    <div class="dropdown-menu btnMenu box" > '
-    s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu " onclick="getProfilAllClick(event)" >Profil All</button> </a> '
     s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu " onclick="onProfilUserClick(event)" >Profil User</button> </a> '
-    s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu " onclick="onDisConnected()" >Disconnect</button> </a> '
+    s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu " onclick="getProfilAllClick(event)" >Profil All</button> </a> '
     if(userObj.Admin ) {
         s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuAdmin" class="btnMenu " onclick="getCompoAdmin(event)" >Admin</button> </a> '
     }
+    s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuDisconnect" class="btnMenu " onclick="onDisConnected()" >Disconnect</button> </a> '
     s = s +  '                    </div>'
     s = s +  '                </div>'
 
