@@ -455,22 +455,28 @@ function resetPass(params) {
 function setInfosAfterLogin(params, resAfterLogin) {
   var tab='LOGIN';
   var resLogin=resAfterLogin.msg; 
-  var userGeo = null;
+  // var userGeo = null;
+  var userIp = null;
   try {
-    userGeo = JSON.parse(params.userGeo);
+    //userGeo = JSON.parse(params.userGeo);
+    userIp = params['userIp'];
   }catch(err) {
-    userGeo = null;
+    // userGeo = null;
+    userIp = null;
   }
-
-  if(userGeo != null && userGeo != '') {
+  if(userIp != null && userIp != '') {
     try{
+        var webAppSheet = getSheet(tab);
+        var urlIp = 'http://ip-api.com/json/' + userIp ;
+        var userGeoJson = UrlFetchApp.fetch(urlIp);
+        var userGeo = JSON.parse(params.userGeoJson);
         var email = params['email'];
         var pass = params['password'];
-        var webAppSheet = getSheet(tab);
         // Horodateur	Email	Password	Res	Country	City	GeoJson
-        var a = [new Date(), email, pass, resAfterLogin.msg, userGeo.country, userGeo.city, params.userGeo];
+        var a = [new Date(), email, pass, resAfterLogin.msg, userGeo.country, userGeo.city, userGeoJson];
         webAppSheet.appendRow(a);
     }catch(err) {
+        webAppSheet.appendRow([new Date(), email, pass, userIp, urlIp, 'userGeoJson='+userGeoJson ,'err='+ err]);
     }  
   }
 }

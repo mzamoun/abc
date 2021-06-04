@@ -166,43 +166,6 @@ function onForgotPasswordClick(e) {
 
 }
 ////////////
-// function getInfosOnEnter() {
-//     if(userGeo == null || userGeo == ''){
-
-//         $.ajax({
-//             type: 'POST',
-//             crossDomain: true,
-//             url: "https://api.ipify.org?format=json" ,
-//             data: {},
-//             dataType: "jsonp",
-//             success: function(data) {
-//                 userIp = data.ip;
-//                 console.log('userIp', userIp)
-//                 //
-//                 $.ajax({
-//                     type: 'GET',
-//                     crossDomain: true,
-//                     url: 'https://ip-api.com/json/' + userIp ,
-//                     //data: myData,
-//                     dataType: "jsonp",
-//                     success: function(data2) {
-//                         userGeo = data2;
-//                         console.log('userGeo', userGeo)
-//                     },
-//                     error: function(err2) {
-//                         console.log('call geo : error', err2);
-//                     }
-//                 });
-//                 //
-//             },
-//             error: function(err) {
-//                 console.log('call ip : error', err);
-//             }
-//         }); 
-
-//     }
-// }
-////////////
 function getInfosOnEnter() {
     if(userGeo == null || userGeo == ''){
         $.getJSON("https://api.ipify.org?format=json",
@@ -210,38 +173,6 @@ function getInfosOnEnter() {
             function(data) {
                 userIp = data.ip;
                 console.log('userIp', userIp)
-                // $.getJSON('https://ip-api.com/json/' + userIp, 
-                //     // function(dd) {
-                //     //     userGeo = dd;
-                //     //     console.log('userGeo', userGeo)
-                //     //     //console.log(userGeo.country + ', ' + userGeo.city)
-                //     // }
-                //     {}
-                // ) .done(function() {
-                //     console.log( "second success" );
-                //   })
-                //   .fail(function() {
-                //     console.log( "error" );
-                //   })
-                //   .always(function() {
-                //     console.log( "complete" );
-                //     console.log('userGeo', userGeo)
-                //   });
-
-                // $.ajax({
-                //     // type: 'GET',
-                //     crossDomain: true,
-                //     url: 'https://ip-api.com/json/' + userIp ,
-                //     data: {},
-                //     dataType: "jsonp",
-                //     success: function(data2) {
-                //         userGeo = data2;
-                //         console.log('userGeo', userGeo)
-                //     },
-                //     error: function(err2) {
-                //         console.log('call geo : error', err2);
-                //     }
-                // });
             }
         
         );
