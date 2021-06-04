@@ -172,7 +172,6 @@ function getInfosOnEnter() {
         
             function(data) {
                 userIp = data.ip;
-                console.log('userIp', userIp)
             }
         
         );
