@@ -452,11 +452,36 @@ function resetPass(params) {
   
 }
 
+function setInfosAfterLogin(params, resAfterLogin) {
+  var tab='LOGIN';
+  var resLogin=resAfterLogin.msg; 
+  var userGeo = null;
+  try {
+    userGeo = JSON.parse(params.userGeo);
+  }catch(err) {
+    userGeo = null;
+  }
+
+  if(userGeo != null && userGeo != '') {
+    try{
+        var email = params['email'];
+        var pass = params['password'];
+        var webAppSheet = getSheet(tab);
+        // Horodateur	Email	Password	Res	Country	City	GeoJson
+        var a = [new Date(), email, pass, resAfterLogin.msg, userGeo.country, userGeo.city, params.userGeo];
+        webAppSheet.appendRow(a);
+    }catch(err) {
+    }  
+  }
+}
+
 function onLogin(params) {
 
     var email = params['email'];
     var pass = params['password'];
     var result = checkLoginPass(email, pass);
+
+    setInfosAfterLogin(params, result);
 
     return result;
 }

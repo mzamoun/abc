@@ -132,6 +132,7 @@ function onLoginClick(e) {
         cmd: 'login',
         email : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
         password : $("#password").val(),
+        userGeo : JSON.stringify(userGeo),
         callbackFun : 'onLogin'
     };
     
@@ -163,3 +164,24 @@ function onForgotPasswordClick(e) {
     callAjaxPost(e, myData);  
 
 }
+////////////
+function getInfosOnEnter() {
+    return;
+    
+    if(userGeo == null || userGeo == ''){
+        getIpByFct(
+            function(data) {
+                userIp = data.ip;
+                $.getJSON('http://ip-api.com/json/' + userIp, 
+                    function(dd) {
+                        userGeo = dd;
+                        //console.log(userGeo.country + ', ' + userGeo.city)
+                    }
+                )
+            }
+        );
+    }
+
+
+}
+/////////////

@@ -1,3 +1,11 @@
+* tabs : login-OK, login-KO : Horodateur, username, pass, ip, geo_json
+
+maps by latitude, longitude: https://www.google.com/maps/@43.29833984375,5.383220195770264
+
+get json data geo_loc by ip : http://ip-api.com/json/2001:861:38c6:10c0:5503:ef12:9096:6653 
+
+
+------------------
 * chat multi rooms; admin : gestion de rooms
     . chaq room est une tab : Horodateur, username, prenom, nom, text
     . ihm : 

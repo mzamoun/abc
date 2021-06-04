@@ -329,6 +329,11 @@ function showDiv(idDiv, ok) {
     }
 }
 ////////////
+function loadShowDiv(id, html, isVisible) {
+    loadDiv(id, html);
+    showDiv(id, isVisible);
+}
+////////////
 function hideInfos() {
     showDiv('success', false);
     showDiv('chargement', false);
@@ -617,3 +622,8 @@ function getCompoListObjectDatas(lines, cols ){
   }
 
   /////////////////////////////////////
+  function getIpByFct(fct) {
+        $.getJSON("https://api.ipify.org?format=json",fct);
+  }
+
+
