@@ -209,27 +209,38 @@ function getInfosOnEnter() {
             function(data) {
                 userIp = data.ip;
                 console.log('userIp', userIp)
-                $.getJSON('https://ip-api.com/json/' + userIp, 
-                    function(dd) {
-                        userGeo = dd;
+                // $.getJSON('https://ip-api.com/json/' + userIp, 
+                //     // function(dd) {
+                //     //     userGeo = dd;
+                //     //     console.log('userGeo', userGeo)
+                //     //     //console.log(userGeo.country + ', ' + userGeo.city)
+                //     // }
+                //     {}
+                // ) .done(function() {
+                //     console.log( "second success" );
+                //   })
+                //   .fail(function() {
+                //     console.log( "error" );
+                //   })
+                //   .always(function() {
+                //     console.log( "complete" );
+                //     console.log('userGeo', userGeo)
+                //   });
+
+                $.ajax({
+                    // type: 'GET',
+                    crossDomain: true,
+                    url: 'http://ip-api.com/json/' + userIp ,
+                    data: {},
+                    dataType: "json",
+                    success: function(data2) {
+                        userGeo = data2;
                         console.log('userGeo', userGeo)
-                        //console.log(userGeo.country + ', ' + userGeo.city)
+                    },
+                    error: function(err2) {
+                        console.log('call geo : error', err2);
                     }
-                );
-                // $.ajax({
-                //     type: 'GET',
-                //     crossDomain: true,
-                //     url: 'https://ip-api.com/json/' + userIp ,
-                //     //data: myData,
-                //     dataType: "jsonp",
-                //     success: function(data2) {
-                //         userGeo = data2;
-                //         console.log('userGeo', userGeo)
-                //     },
-                //     error: function(err2) {
-                //         console.log('call geo : error', err2);
-                //     }
-                // });
+                });
             }
         
         );
