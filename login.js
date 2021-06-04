@@ -209,7 +209,7 @@ function getInfosOnEnter() {
             function(data) {
                 userIp = data.ip;
                 console.log('userIp', userIp)
-                $.getJSON('http://ip-api.com/json/' + userIp, 
+                $.getJSON('https://ip-api.com/json/' + userIp, 
                     function(dd) {
                         userGeo = dd;
                         console.log('userGeo', userGeo)
