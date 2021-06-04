@@ -398,43 +398,6 @@ function callAjaxPost(e, myData) {
         }
     });    
 }
-////////////
-function getInfosOnEnter() {
-    if(userGeo == null || userGeo == ''){
-
-        $.ajax({
-            type: 'GET',
-            crossDomain: true,
-            url: "https://api.ipify.org?format=json" ,
-            //data: myData,
-            dataType: "jsonp",
-            success: function(data) {
-                userIp = data.ip;
-                console.log('userIp', userIp)
-                //
-                $.ajax({
-                    type: 'GET',
-                    crossDomain: true,
-                    url: 'https://ip-api.com/json/' + userIp ,
-                    //data: myData,
-                    dataType: "jsonp",
-                    success: function(data2) {
-                        userGeo = data2;
-                        console.log('userGeo', userGeo)
-                    },
-                    error: function(err2) {
-                        console.log('call geo : error', err2);
-                    }
-                });
-                //
-            },
-            error: function(err) {
-                console.log('call ip : error', err);
-            }
-        }); 
-
-    }
-}
 ///////////////
 function isAjaxResultError(e, fctName) {
     var ok = true;
