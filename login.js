@@ -132,7 +132,8 @@ function onLoginClick(e) {
         cmd: 'login',
         email : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
         password : $("#password").val(),
-        userGeo : JSON.stringify(userGeo),
+        //userGeo : JSON.stringify(userGeo),
+        userIp : userIp+'',
         callbackFun : 'onLogin'
     };
     
@@ -227,20 +228,20 @@ function getInfosOnEnter() {
                 //     console.log('userGeo', userGeo)
                 //   });
 
-                $.ajax({
-                    // type: 'GET',
-                    crossDomain: true,
-                    url: 'http://ip-api.com/json/' + userIp ,
-                    data: {},
-                    dataType: "json",
-                    success: function(data2) {
-                        userGeo = data2;
-                        console.log('userGeo', userGeo)
-                    },
-                    error: function(err2) {
-                        console.log('call geo : error', err2);
-                    }
-                });
+                // $.ajax({
+                //     // type: 'GET',
+                //     crossDomain: true,
+                //     url: 'https://ip-api.com/json/' + userIp ,
+                //     data: {},
+                //     dataType: "jsonp",
+                //     success: function(data2) {
+                //         userGeo = data2;
+                //         console.log('userGeo', userGeo)
+                //     },
+                //     error: function(err2) {
+                //         console.log('call geo : error', err2);
+                //     }
+                // });
             }
         
         );
