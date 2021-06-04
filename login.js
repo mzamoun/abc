@@ -166,7 +166,6 @@ function onForgotPasswordClick(e) {
 }
 ////////////
 function getInfosOnEnter() {
-    return;
     
     if(userGeo == null || userGeo == ''){
         getIpByFct(
