@@ -166,12 +166,11 @@ function onForgotPasswordClick(e) {
 }
 ////////////
 function getInfosOnEnter() {
-    
     if(userGeo == null || userGeo == ''){
         getIpByFct(
             function(data) {
                 userIp = data.ip;
-                $.getJSON('http://ip-api.com/json/' + userIp, 
+                $.getJSON('https://ip-api.com/json/' + userIp, 
                     function(dd) {
                         userGeo = dd;
                         //console.log(userGeo.country + ', ' + userGeo.city)
@@ -180,7 +179,5 @@ function getInfosOnEnter() {
             }
         );
     }
-
-
 }
 /////////////
