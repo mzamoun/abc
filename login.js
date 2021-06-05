@@ -167,7 +167,7 @@ function onForgotPasswordClick(e) {
 }
 ////////////
 function getInfosOnEnter() {
-    if(userGeo == null || userGeo == ''){
+    if(userIp == null || userIp == ''){
         $.getJSON("https://api.ipify.org?format=json",
         
             function(data) {
