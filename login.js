@@ -80,7 +80,7 @@ function showLogin() {
 function isConnected() {
     username = getCookie("username");
     ok = false;
-    if (username != null && username != '') {
+    if (username && username != null && username != '') {
         ok = true;
     }
     return ok;
