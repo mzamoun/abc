@@ -4,7 +4,9 @@ function showMenu() {
     username = getCookie("username");
     loadDiv("menu",  getCompoMenu() );
     if(isConnected()) {
-        loadDiv("btnUserIcon",  username );
+        var prenom = userObj.Prenom;
+        var nom = userObj.Nom;
+        loadDiv("btnUserIcon",  prenom + " " + nom );
     }else {
         loadDiv("btnUserIcon",  'Login' );
     }
@@ -21,6 +23,8 @@ function getCompoMenuLogin() {
 
 function getCompoMenuLoged() {
     restoreLoginInBrowser();
+
+    if(!isConnected()) return '';
 
     var s = '';
 
