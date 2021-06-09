@@ -1,5 +1,13 @@
 
 function saveFormUser(e) {
+
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     if(!isAjaxResultError(e, 'saveFormUser') ) {
         showSuccess("<p>saveFormUser: </p>"  + e.msg );
     }else {
@@ -9,6 +17,14 @@ function saveFormUser(e) {
 
 function onSaveFormUserClick(e) {
     e.preventDefault();
+
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     userFormToObj(userObj, cols);
     saveLoginInBrowser();
 
@@ -22,12 +38,26 @@ function onSaveFormUserClick(e) {
 }
 
 function showFormEditUser() {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     //console.log('DBG: showFormEditUser DEB');
     showCompo( getCompoFormEdit(userObj, cols, colsType, 'userForm', 'onProfilUserFromDb', 'onSaveFormUserClick'));
     $('#compo').toggleClass('center');
 }
 
 function editProfilUser(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
 
     if(!isAjaxResultError(e, 'editProfilUser')) {
         userObj = e.data;
@@ -41,6 +71,12 @@ function editProfilUser(e) {
 
 ////////
 function onProfilUserFromDb(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }    
     
     var myData = {
         cmd: 'editProfilUser',
@@ -56,6 +92,12 @@ function onProfilUserClick(e) {
 
     hideInfos();
 
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }    
+
     restoreLoginInBrowser();
     
     if(userObj != null && userObj != '') {
@@ -68,6 +110,13 @@ function onProfilUserClick(e) {
 //////////////////////////////////////////////////////////////////
 
 function isValidAddUser(user) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     if(!isEmail(user.Email)) {
         showError('Email not correct: ' + user.Email);
         return false;
@@ -83,6 +132,13 @@ function isValidAddUser(user) {
 }
 
 function addUserCallback(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     if(!isAjaxResultError(e, 'addUserCallback') ) {
         showSuccess("<p>addUserCallback: </p>"  + e.msg );
     }else {
@@ -91,7 +147,14 @@ function addUserCallback(e) {
 }
 
 function onAddUserClick(e) {
+
     e.preventDefault();
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     var user = {};
     userFormToObj(user, colsWithEmail);
 
@@ -109,6 +172,13 @@ function onAddUserClick(e) {
 ///////////
 
 function delUserCallback(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     if(!isAjaxResultError(e, 'delUserCallback') ) {
         showSuccess("<p>delUserCallback: </p>"  + e.msg );
     }else {
@@ -118,6 +188,13 @@ function delUserCallback(e) {
 
 function onDelUserClick(e) {
     e.preventDefault();
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     var user = {};
     userFormToObj(user, ['Email']);
 
@@ -140,17 +217,38 @@ function onDelUserClick(e) {
 /////////////////////////////////////////////////////////////////
 
 function showIhmProfilAllDatas(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     //console.log('showIhmProfilAllDatas: length:', usersObjFilter.length);
     loadDiv('datas', getCompoListObjectDatas(usersObjFilter, cols) );
 //    loadDiv('datas', '' );
 }
 
 function showIhmProfilAll(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     showCompo( getCompoListObject(usersObjFilter, cols, 'getProfilAllFromDbAjax', 'searchProfilAll', filtre));
     $('#compo').toggleClass('center');
 }
 
 function searchProfilAll(e, filtreIhm) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     //e.preventDefault();
     filtre = filtreIhm + '';
     filtre = replaceAccents(filtre);
@@ -221,6 +319,12 @@ function searchProfilAll(e, filtreIhm) {
 
 function getProfilAllFromDbCallback(e) {
 
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
+
     if(!isAjaxResultError(e, 'getProfilUsersFromDbCallback')) {
         filtre = '';
         usersObj = e.data;
@@ -235,6 +339,12 @@ function getProfilAllFromDbCallback(e) {
 
 ////////
 function getProfilAllFromDbAjax(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
     
     var myData = {
         cmd: 'getProfilAll',
@@ -247,6 +357,12 @@ function getProfilAllFromDbAjax(e) {
 
 ////////////////
 function getProfilAllClick(e) {
+
+    if(!isConnected()) {
+        showMenu();
+        showLogin();
+        return;
+    }
 
     hideInfos();
 

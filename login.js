@@ -100,6 +100,7 @@ function onDisConnected() {
     ConfirmDialog('Do you want to disconnect ?', 
         function() {
             userObj='';
+            usersObj='';
             username = '';
             saveLoginInBrowser();
             showMenu();
