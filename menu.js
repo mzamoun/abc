@@ -29,7 +29,7 @@ function getCompoMenuLoged() {
     var s = '';
 
     s = s +  '                <div class="nav-item dropdown btnUserIcon">'
-    s = s +  '                    <div class="dropdown-toggle btnUserIcon" id="btnUserIcon" data-toggle="dropdown">'
+    s = s +  '                    <div class="dropdown-toggle btnUserIcon btnMenu" id="btnUserIcon" data-toggle="dropdown">'
     s = s +  '                      Dropdown User'
     s = s +  '                    </div>'
     s = s +  '                    <div class="dropdown-menu btnMenu box" > '
@@ -79,7 +79,7 @@ function getCompoMenuAll() {
 function getCompoMenuAcceuil() {
     var s = '';
 
-    s = s +  '    ' + getElement('div', {id:"btnAcceuil", class:"navbar-brand btnAcceuil", onclick:"showAcceuil();"}, 'Acceuil') ;
+    s = s +  '    ' + getElement('div', {id:"btnAcceuil", class:"navbar-brand btnAcceuil btnMenu", onclick:"showAcceuil();"}, 'Acceuil') ;
 
     return s;
 }
