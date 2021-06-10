@@ -1,11 +1,21 @@
 function showAcceuil() {
     hideInfos();
-    var html = getElement('h1', null, 'مرحبا بكم في نادي الأعمال الجزائري ') + '<br>' +
-    getElement('h1', null, 'Welcome to Algerian Business Club ') + '<br>' ;
-    if(!isConnected()) {
-        html += '<br>'+getElement('button', {class:"box", onclick:"showLogin()" }, 'Login') + '<br>' ;
-    }
+        var html = getElement('h1', null, 'مرحبا بكم في نادي الأعمال الجزائري ') + '<br>' ;
+        html += getElement('h1', null, 'Welcome to Algerian Business Club ') + '<br>' ;
+        if(!isConnected()) {
+            html += '<br>'+getElement('button', {class:"box", onclick:"showLogin()" }, 'Login') + '<br>' ;
+        }else {
+            html += '<br>'+getElement('button', {class:"box", onclick:"openMenuUser(event)" }, 'Show Profil Menu') + '<br>' ;
+        }
     showCompo( html);
+}
+
+function onClickLogoAcceuil(ev) {
+    if(!isConnected()) {
+        showLogin(ev);
+    }else {
+        openMenuUser(ev);
+    }
 }
 
 function getCompoPersonPrez(prenom, nom, fonction, desc) {

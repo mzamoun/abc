@@ -32,7 +32,7 @@ function getCompoMenuLoged() {
     s = s +  '                    <div class="dropdown-toggle btnUserIcon btnMenu" id="btnUserIcon" data-toggle="dropdown">'
     s = s +  '                      Dropdown User'
     s = s +  '                    </div>'
-    s = s +  '                    <div class="dropdown-menu btnMenu box" > '
+    s = s +  '                    <div class="dropdown-menu btnMenu box"  > '
     s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuProfilUser" class="btnMenu " onclick="onProfilUserClick(event)" >Profil User</button> </a> '
     s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuProfilAll" class="btnMenu " onclick="getProfilAllClick(event)" >Profil All</button> </a> '
     s = s +  '                         <li> <a class="dropdown-item btnMenu" > <button id="menuChat" class="btnMenu " onclick="onChatClick(event)" > Chat </button> </a> '
@@ -44,6 +44,16 @@ function getCompoMenuLoged() {
     s = s +  '                </div>'
 
     return s;
+}
+
+function openMenuUser(e) {
+    e.stopPropagation();
+
+    var el = $('#btnUserIcon');
+    if(el)    {el.dropdown('toggle'); }
+    else {
+        debug('el btn user is NULL!!')
+    }
 }
 
 function getCompoMenuUser() {

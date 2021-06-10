@@ -70,7 +70,7 @@ function addEventValidUsername(listBtns) {
 
 ////////////
 
-function showLogin() {
+function showLogin(ev) {
     hideInfos();
     loadDiv("compo",  getCompoFormLogin() );
 }
