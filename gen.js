@@ -333,6 +333,18 @@ function showDiv(idDiv, ok) {
     }
 }
 ////////////
+
+function getDateTimeStr(date) {
+    // return ex: "mercredi 9 juin 2021, 21:30:07" or Donnerstag, 20. Dezember 2012 or ...
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    const locale = undefined; // 'ar-EG', 'de-DE', ...
+    return date.toLocaleDateString(locale, options) ;
+}
+
+function getDateTimeNowStr() {
+    return getDateTimeStr(dateTimeNow) ;
+}
+
 function loadShowDiv(id, html, isVisible) {
     loadDiv(id, html);
     showDiv(id, isVisible);

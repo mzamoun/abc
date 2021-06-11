@@ -47,7 +47,7 @@ function onClickChanel(ev) {
 function addMsgInContent(msg) {
     var el = $('#chanelContent')
     var s = '';
-    s += getElement('h3', null, msg.user) + msg.date + '<br>' ;
+    s += getElement('b', null, msg.user) + ' : ' + getDateTimeStr(msg.date) + '<br>' ;
     s += msg.text + '<p>';
     el.append(s);
 }
