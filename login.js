@@ -9,9 +9,11 @@ function getCompoFormLogin() {
     s = s + '    <input type="text" placeholder="Email" id="username" autocomplete="username">  '
     s = s + '    <input type="password" placeholder="Password" id="password" autocomplete="current-password">  '
 
-    s = s + '        <a id="forgotPassword" href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>'
+    // s = s + '        <a id="forgotPassword" href="#" class="forgot" onclick="return onForgotPasswordClick(event);">forgot password?</a>'
 
     s = s + '  <input type="submit" id="btnLogin" value="Sign In">'
+    s +=    '<br>'
+    s = s + '  <input type="button" id="btnResetPassword" onclick="onForgotPasswordClick(event);" value="Send me new Password">'
 
     s = s +  ' <!-- <div class="shadow"></div> -->'
     s = s + ' </div>'
@@ -22,7 +24,7 @@ function getCompoFormLogin() {
     s = s + '$(document).ready(function(){'
     s = s + '   //hideInfos();\n'
     s = s + '   $("#btnLogin").click(function(e){ onLoginClick(e); });'
-    s = s + '   addEventValidUsername(["btnLogin", "forgotPassword"]);'
+    s = s + '   addEventValidUsername(["btnLogin", "forgotPassword", "btnResetPassword"]);'
     s = s + ' }); '
     s = s + '</script>'
 
