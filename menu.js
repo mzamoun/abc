@@ -16,7 +16,7 @@ function showMenu() {
 function getCompoMenuLogin() {
     var s = '';
 
-    s = s +  '                <button id="menuLogin" class="btnMenu btnUserIcon btn" onclick="showLogin()" >Login</button> '
+    s = s +  '                <button id="menuLogin" class="btnMenu" onclick="showLogin()" >Login</button> '
 
     return s;
 }
@@ -29,7 +29,7 @@ function getCompoMenuLoged() {
     var s = '';
 
     s = s +  '                <div class="nav-item dropdown btnUserIcon">'
-    s = s +  '                    <div class="dropdown-toggle btnUserIcon btnMenu" id="btnUserIcon" data-toggle="dropdown">'
+    s = s +  '                    <div class="dropdown-toggle btnMenu" id="btnUserIcon" data-toggle="dropdown">'
     s = s +  '                      Dropdown User'
     s = s +  '                    </div>'
     s = s +  '                    <div class="dropdown-menu btnMenu box"  > '
