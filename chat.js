@@ -35,13 +35,21 @@ function onChatClick(ev) {
 
 var channelId = null;
 var channelLabel = '';
+var messagesMap = new Map();
+var messages = [];
 function onClickChanel(ev) {
     showDiv("chanelMsgInputRoot", true);
     var btn = ev.srcElement;
     channelId = btn.id;
     channelLabel = $('#'+channelId).text() ;
-    $('#msgInput').attr('placeholder', 'Message #'+channelLabel)
-    
+    $('#msgInput').attr('placeholder', 'Message #'+channelLabel);
+    messages = messagesMap.get(channelId);
+    if(!messages) messages = [];
+    var el = $('#chanelContent');
+    el.html('');
+    for(var i=0; i<messages.length; i++) {
+        addMsgInContent(messages[i]);
+    }
 }
 
 function addMsgInContent(msg) {
@@ -54,8 +62,9 @@ function addMsgInContent(msg) {
 
 var listMsg = []
 function addMessage(msg){
-    listMsg.push(msg)
     addMsgInContent(msg)
+    messages.push(msg)
+    messagesMap.set(channelId, messages);
 }
 
 function onMsgEnter(ev) {
