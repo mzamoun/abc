@@ -19,3 +19,13 @@ colsTypeWithEmail.splice(0, 0, 'text');
 
 var colsMandatoryWithEmail = colsMandatory;
 colsMandatoryWithEmail.splice(0, 0, '*');
+
+////////////
+
+function getUserName() {
+    if(userObj) {
+        return userObj.Prenom + ' ' + userObj.Nom;
+    }else {
+        return '';
+    }
+}

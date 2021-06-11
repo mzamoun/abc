@@ -20,7 +20,7 @@ function onChatClick(ev) {
     html += '<div id="chanelMsgInputRoot">';
     html += getElement('div', {id:"msgCorp", class:"msgCorp"}, '') + '<br>' ;
     html += getElement('div', {id:"msgInputRoot", class:"msgInputRoot"}, 
-                getElement('input', {id:"msgInput", onclick:"addMessage(event)", class:"msgInput"}, '') + '<br>'
+                getElement('input', {id:"msgInput", class:"msgInput", onkeyup:"onMsgEnter(event)"}, '') + '<br>'
         ) + '<br>' ;
     html += '</div>';
 
@@ -36,10 +36,35 @@ function onChatClick(ev) {
 var channelId = null;
 var channelLabel = '';
 function onClickChanel(ev) {
+    showDiv("chanelMsgInputRoot", true);
     var btn = ev.srcElement;
     channelId = btn.id;
     channelLabel = $('#'+channelId).text() ;
     $('#msgInput').attr('placeholder', 'Message #'+channelLabel)
     
+}
+
+function addMsgInContent(msg) {
+    var el = $('#chanelContent')
+    var s = '';
+    s += getElement('h3', null, msg.user) + msg.date + '<br>' ;
+    s += msg.text + '<p>';
+    el.append(s);
+}
+
+var listMsg = []
+function addMessage(msg){
+    listMsg.push(msg)
+    addMsgInContent(msg)
+}
+
+function onMsgEnter(ev) {
+    var key = ev.key;
+    if(key == "Enter") {
+        var user = getUserName();
+        var text = $('#msgInput').val();
+        addMessage({channelId, user, text, date:new Date()});
+        $('#msgInput').val('');
+    }
 }
 

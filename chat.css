@@ -9,6 +9,10 @@
     border-radius: 10px;
 }
 
+#chanelMsgInputRoot {
+    display: none;
+}
+
 .msgInputRoot {
     height: 20%;
     width: 90%; 
