@@ -56,7 +56,9 @@ function addMsgInContent(msg) {
     var el = $('#chanelContent')
     var s = '';
     s += getElement('b', null, msg.user) + ' : ' + getDateTimeStr(msg.date) + '<br>' ;
-    s += msg.text + '<p>';
+    var text = msg.text;
+    text = getAnchorHttp(text);
+    s += text + '<p>';
     el.append(s);
 }
 
