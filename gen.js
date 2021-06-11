@@ -1,3 +1,7 @@
+function debug(msg) {
+    console.log(msg)
+}
+
 String.prototype.sansAccent = function(){
     var accent = [
         /[\300-\306]/g, /[\340-\346]/g, // A, a
