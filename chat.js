@@ -5,10 +5,12 @@ function onChatClick(ev) {
     html += '<table class="tableChat">';
     html += '<tr>';
     
-    html += '<td id="chanelsList">';
-    html += getElement('h1', null, 'Not implemented yet, but : ') + '<br>' ;
-    html += getElement('button', {class:"btn", id:"channel1", onclick:"onClickChanel(event)"}, 'chanel 1 ') + '<br>' ;
-    html += getElement('button', {class:"btn", id:"channel2", onclick:"onClickChanel(event)"}, 'chanel 2 ') + '<br>' ;
+    html += '<td id="chanelsListRoot" class="v-align-top">';
+    html += '<div id="chanelsList" class="v-align-top">';
+        html += getElement('h1', null, 'Not implemented yet, but : ') + '<br>' ;
+        html += getElement('button', {class:"btn", id:"channel1", onclick:"onClickChanel(event)"}, 'chanel 1 ') + '<br>' ;
+        html += getElement('button', {class:"btn", id:"channel2", onclick:"onClickChanel(event)"}, 'chanel 2 ') + '<br>' ;
+    html += '</div>';
     html += '</td>';
     
     html += '<td id="chanelContentRoot">';
@@ -37,6 +39,7 @@ var channelId = null;
 var channelLabel = '';
 var messagesMap = new Map();
 var messages = [];
+
 function onClickChanel(ev) {
     showDiv("chanelMsgInputRoot", true);
     var btn = ev.srcElement;
